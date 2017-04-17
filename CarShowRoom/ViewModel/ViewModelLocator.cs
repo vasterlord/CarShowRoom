@@ -32,11 +32,11 @@ namespace CarShowRoom.ViewModel
 
             if (ViewModelBase.IsInDesignModeStatic)
             {
-                SimpleIoc.Default.Register<IDataService, Design.DesignDataService>();
+                SimpleIoc.Default.Register<IMainWinService, Design.DesignMainWinService>();
             }
             else
             {
-                SimpleIoc.Default.Register<IDataService, DataService>();
+                SimpleIoc.Default.Register<IMainWinService, MainWinService>();
             }
 
             SimpleIoc.Default.Register<MainViewModel>();

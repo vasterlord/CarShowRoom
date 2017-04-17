@@ -6,8 +6,8 @@ using System.Text;
 
 namespace CarShowRoom.Services
 {
-    public interface IDataService
+    public interface IMainWinService
     {
-        void GetData(Action<DataItem, Exception> callback);
+        void GetData(Action<MainWinData, Exception> callback);
     }
 }

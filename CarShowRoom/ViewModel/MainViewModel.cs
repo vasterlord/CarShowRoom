@@ -19,7 +19,7 @@ namespace CarShowRoom.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase , IGeneralComands, INotifyPropertyChanged
     {
-        private readonly IDataService _dataService;
+        private readonly IMainWinService _dataService;
         private string _toolBarDescriptionItem = string.Empty;
 
         public string ToolBarDescriptionItem
@@ -49,7 +49,7 @@ namespace CarShowRoom.ViewModel
 
         public ICommand WindowLoaded {get; set; }
 
-        public MainViewModel(IDataService dataService)
+        public MainViewModel(IMainWinService dataService)
         { 
             DispatcherTimer timer = new DispatcherTimer();
             timer.Tick += new EventHandler(timer_Tick);
@@ -67,17 +67,6 @@ namespace CarShowRoom.ViewModel
                     ToolBarDescriptionItem = item.ToolBarDescription;
                 });
         }
-
-        //public ICommand WindowLoaded
-        //{
-        //    get; private set;
-        //}
-
-        //private void OnLoaded()
-        //{
-        //    MessageBox.Show("Program loaded", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
-        //}
-
         private void timer_Tick(object sender, EventArgs e)
         {
             ToolBarValueItem = DateTime.Now.ToString();
