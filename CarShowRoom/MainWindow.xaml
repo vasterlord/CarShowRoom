@@ -22,11 +22,12 @@
 
         <TextBlock FontSize="36"
                    FontWeight="Bold"
-                   Foreground="Purple"
+                   Foreground="LightBlue"
                    Text="{Binding WelcomeTitle}"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    TextWrapping="Wrap" />
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="78,229,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Window>
