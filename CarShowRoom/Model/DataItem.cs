@@ -1,16 +1,24 @@
-﻿namespace CarShowRoom.Model
+﻿using GalaSoft.MvvmLight;
+using System;
+namespace CarShowRoom.Model
 {
     public class DataItem
     {
-        public string Title
+        private string _toolBarDescription;
+        public string ToolBarDescription
         {
-            get;
-            private set;
-        }
-
-        public DataItem(string title)
+            get
+            {
+                return _toolBarDescription;
+            } 
+            set
+            {
+                _toolBarDescription = value;
+            }
+        } 
+        public DataItem()
         {
-            Title = title;
+            ToolBarDescription = "Date and time:  ";
         }
     }
 }

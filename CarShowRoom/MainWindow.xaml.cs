@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 using CarShowRoom.ViewModel;
+using System.Windows.Threading;
+using System;
 
 namespace CarShowRoom
 {

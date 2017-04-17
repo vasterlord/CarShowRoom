@@ -1,5 +1,11 @@
 ﻿using GalaSoft.MvvmLight;
 using CarShowRoom.Model;
+using System.Windows.Input;
+using Microsoft.Practices.Prism.Commands;
+using System.Windows.Threading;
+using System;
+using GalaSoft.MvvmLight.Command;
+using Xceed.Wpf.Toolkit;
 
 namespace CarShowRoom.ViewModel
 {
@@ -12,35 +18,40 @@ namespace CarShowRoom.ViewModel
     public class MainViewModel : ViewModelBase
     {
         private readonly IDataService _dataService;
+        private string _toolBarDescriptionItem = string.Empty;
 
-        /// <summary>
-        /// The <see cref="WelcomeTitle" /> property's name.
-        /// </summary>
-        public const string WelcomeTitlePropertyName = "WelcomeTitle";
-
-        private string _welcomeTitle = string.Empty;
-
-        /// <summary>
-        /// Gets the WelcomeTitle property.
-        /// Changes to that property's value raise the PropertyChanged event. 
-        /// </summary>
-        public string WelcomeTitle
+        public string ToolBarDescriptionItem
         {
             get
             {
-                return _welcomeTitle;
+                return _toolBarDescriptionItem;
             }
             set
             {
-                Set(ref _welcomeTitle, value);
+                Set(ref _toolBarDescriptionItem, value);
             }
         }
+        private string _toolBarValueItem = string.Empty;
 
-        /// <summary>
-        /// Initializes a new instance of the MainViewModel class.
-        /// </summary>
-        public MainViewModel(IDataService dataService)
+        public string ToolBarValueItem
         {
+            get
+            {
+                return _toolBarValueItem;
+            }
+            set
+            {
+                Set(ref _toolBarValueItem, value);
+            }
+        }
+ 
+
+        public MainViewModel(IDataService dataService)
+        { 
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Tick += new EventHandler(timer_Tick);
+            timer.Start();
+            WindowLoaded = new RelayCommand(OnLoaded);
             _dataService = dataService;
             _dataService.GetData(
                 (item, error) =>
@@ -50,11 +61,25 @@ namespace CarShowRoom.ViewModel
                         // Report error here
                         return;
                     }
-
-                    WelcomeTitle = item.Title;
+                    ToolBarDescriptionItem = item.ToolBarDescription;
                 });
         }
 
+        public ICommand WindowLoaded
+        {
+            get; private set;
+        }
+
+        private void OnLoaded()
+        {
+            MessageBox.Show("Program loaded", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            ToolBarValueItem = DateTime.Now.ToString();
+        }
+         
         ////public override void Cleanup()
         ////{
         ////    // Clean up if needed

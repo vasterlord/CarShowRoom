@@ -8,7 +8,8 @@ namespace CarShowRoom.Model
         {
             // Use this to connect to the actual data service
 
-            var item = new DataItem("Welcome to MVVM Light");
+            DataItem item = new DataItem(); 
+            item.ToolBarDescription = "Date and time:  ";
             callback(item, null);
         }
     }

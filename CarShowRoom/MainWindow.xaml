@@ -3,13 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:ignore="http://www.galasoft.ch/ignore"
+        xmlns:ignore="http://www.galasoft.ch/ignore"   
+        xmlns:intr="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d ignore"
-        Height="300"
-        Width="300"
-        Title="MVVM Light Application"
-        DataContext="{Binding Main, Source={StaticResource Locator}}">
-    
+        Height="280"
+        Width="320"
+        Title="Start window"
+        DataContext="{Binding Main, Source={StaticResource Locator}}" ResizeMode="NoResize">
+    <intr:Interaction.Triggers>
+        <intr:EventTrigger EventName="Loaded">
+            <intr:InvokeCommandAction Command="{Binding WindowLoaded}"/>
+        </intr:EventTrigger>
+    </intr:Interaction.Triggers>
+
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -18,16 +24,44 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid x:Name="LayoutRoot">
-
-        <TextBlock FontSize="36"
-                   FontWeight="Bold"
-                   Foreground="LightBlue"
-                   Text="{Binding WelcomeTitle}"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
+    <Grid x:Name="LayoutRoot"> 
+        <DockPanel>
+            <ToolBarTray DockPanel.Dock="Bottom" Height="16">
+                <ToolBar>
+                    <TextBlock  
+                   FontWeight='Regular' 
+                   FontSize="12"
+                   Foreground="LightSeaGreen"
+                   Text="{Binding ToolBarDescriptionItem}"
                    TextWrapping="Wrap" />
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="78,229,0,0" VerticalAlignment="Top" Width="75"/>
+                    <TextBlock
+                   FontWeight='Regular'  
+                   FontSize="12"
+                   Text="{Binding ToolBarValueItem}"
+                   Foreground="Orange"
+                   TextWrapping="Wrap" />
+                </ToolBar>
+            </ToolBarTray>
+            <TextBox AcceptsReturn="True" />
+        </DockPanel>
+        <Image Margin="0,20,0,16" Stretch="Fill">
+            <Image.Source>
+                <BitmapImage UriSource="C:\Users\Yulian\Desktop\EntityProject\CarShowRoom\CarShowRoom\wall.jpg"/>
+            </Image.Source>
+        </Image>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top" Height="auto">
+                <MenuItem Header="_File" FontSize="13" Foreground="Aquamarine" Height="21">
+                    <MenuItem Header="_New" FontSize="13" Foreground="Coral" Height="21"/>
+                    <MenuItem Header="_Open" FontSize="13" Foreground="BlueViolet" Height="21"/>
+                    <MenuItem Header="_Save" FontSize="13" Foreground="LimeGreen" Height="21"/>
+                    <Separator />
+                    <MenuItem Header="_Exit" FontSize="13" Foreground="Crimson" Height="21"/>
+                </MenuItem>
+            </Menu>
+            <TextBox AcceptsReturn="True" />
+        </DockPanel>
+        
 
     </Grid>
 </Window>
