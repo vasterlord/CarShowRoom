@@ -6,6 +6,8 @@ using System.Windows.Threading;
 using System;
 using GalaSoft.MvvmLight.Command;
 using Xceed.Wpf.Toolkit;
+using CarShowRoom.Services;
+using System.ComponentModel;
 
 namespace CarShowRoom.ViewModel
 {
@@ -15,7 +17,7 @@ namespace CarShowRoom.ViewModel
     /// See http://www.mvvmlight.net
     /// </para>
     /// </summary>
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : ViewModelBase , IGeneralComands, INotifyPropertyChanged
     {
         private readonly IDataService _dataService;
         private string _toolBarDescriptionItem = string.Empty;
@@ -44,7 +46,8 @@ namespace CarShowRoom.ViewModel
                 Set(ref _toolBarValueItem, value);
             }
         }
- 
+
+        public ICommand WindowLoaded {get; set; }
 
         public MainViewModel(IDataService dataService)
         { 
@@ -65,21 +68,26 @@ namespace CarShowRoom.ViewModel
                 });
         }
 
-        public ICommand WindowLoaded
-        {
-            get; private set;
-        }
+        //public ICommand WindowLoaded
+        //{
+        //    get; private set;
+        //}
 
-        private void OnLoaded()
-        {
-            MessageBox.Show("Program loaded", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
-        }
+        //private void OnLoaded()
+        //{
+        //    MessageBox.Show("Program loaded", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+        //}
 
         private void timer_Tick(object sender, EventArgs e)
         {
             ToolBarValueItem = DateTime.Now.ToString();
         }
-         
+
+        public void OnLoaded()
+        {
+            MessageBox.Show("Program loaded", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+        }
+
         ////public override void Cleanup()
         ////{
         ////    // Clean up if needed

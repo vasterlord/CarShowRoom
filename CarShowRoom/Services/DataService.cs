@@ -1,6 +1,7 @@
-﻿using System;
+﻿using CarShowRoom.Model;
+using System;
 
-namespace CarShowRoom.Model
+namespace CarShowRoom.Services
 {
     public class DataService : IDataService
     {
@@ -8,7 +9,7 @@ namespace CarShowRoom.Model
         {
             // Use this to connect to the actual data service
 
-            DataItem item = new DataItem(); 
+            var item = new DataItem(); 
             item.ToolBarDescription = "Date and time:  ";
             callback(item, null);
         }

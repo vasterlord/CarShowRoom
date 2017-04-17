@@ -1,9 +1,10 @@
-﻿using System;
+﻿using CarShowRoom.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace CarShowRoom.Model
+namespace CarShowRoom.Services
 {
     public interface IDataService
     {

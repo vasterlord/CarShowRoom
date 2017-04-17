@@ -13,6 +13,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using CarShowRoom.Model;
+using CarShowRoom.Services;
 
 namespace CarShowRoom.ViewModel
 {

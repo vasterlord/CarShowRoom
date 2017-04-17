@@ -9,7 +9,10 @@
         Height="280"
         Width="320"
         Title="Start window"
-        DataContext="{Binding Main, Source={StaticResource Locator}}" ResizeMode="NoResize">
+        DataContext="{Binding Main, Source={StaticResource Locator}}" ResizeMode="NoResize" 
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto">
     <intr:Interaction.Triggers>
         <intr:EventTrigger EventName="Loaded">
             <intr:InvokeCommandAction Command="{Binding WindowLoaded}"/>
