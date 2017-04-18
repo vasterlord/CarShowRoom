@@ -6,7 +6,6 @@ using System.Windows.Threading;
 using System;
 using GalaSoft.MvvmLight.Command;
 using Xceed.Wpf.Toolkit;
-using CarShowRoom.Services;
 using System.ComponentModel;
 
 namespace CarShowRoom.ViewModel
@@ -17,9 +16,8 @@ namespace CarShowRoom.ViewModel
     /// See http://www.mvvmlight.net
     /// </para>
     /// </summary>
-    public class MainViewModel : ViewModelBase , IGeneralComands, INotifyPropertyChanged
+    public class MainViewModel : ViewModelBase , INotifyPropertyChanged
     {
-        private readonly IMainWinService _dataService;
         private string _toolBarDescriptionItem = string.Empty;
 
         public string ToolBarDescriptionItem
@@ -49,23 +47,15 @@ namespace CarShowRoom.ViewModel
 
         public ICommand WindowLoaded {get; set; }
 
-        public MainViewModel(IMainWinService dataService)
-        { 
+        public MainViewModel()
+        {
+            MainWinData item = new MainWinData();
+            item.ToolBarDescription = "Date and time:  ";
             DispatcherTimer timer = new DispatcherTimer();
             timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
-            WindowLoaded = new RelayCommand(OnLoaded);
-            _dataService = dataService;
-            _dataService.GetData(
-                (item, error) =>
-                {
-                    if (error != null)
-                    {
-                        // Report error here
-                        return;
-                    }
-                    ToolBarDescriptionItem = item.ToolBarDescription;
-                });
+            WindowLoaded = new RelayCommand(OnLoaded); 
+           ToolBarDescriptionItem = item.ToolBarDescription; 
         }
         private void timer_Tick(object sender, EventArgs e)
         {

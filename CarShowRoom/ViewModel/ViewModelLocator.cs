@@ -13,7 +13,8 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using CarShowRoom.Model;
-using CarShowRoom.Services;
+using GalaSoft.MvvmLight.Messaging;
+using Xceed.Wpf.Toolkit;
 
 namespace CarShowRoom.ViewModel
 {
@@ -26,25 +27,18 @@ namespace CarShowRoom.ViewModel
     /// </summary>
     public class ViewModelLocator
     {
-        static ViewModelLocator()
+        public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             if (ViewModelBase.IsInDesignModeStatic)
             {
-                SimpleIoc.Default.Register<IMainWinService, Design.DesignMainWinService>();
+                SimpleIoc.Default.Register<Design.DesignMainWinService>();
             }
-            else
-            {
-                SimpleIoc.Default.Register<IMainWinService, MainWinService>();
-            }
-
             SimpleIoc.Default.Register<MainViewModel>();
+            Messenger.Default.Register<NotificationMessage>(this, NotifyUserMethod);
         }
 
-        /// <summary>
-        /// Gets the Main property.
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
@@ -55,6 +49,11 @@ namespace CarShowRoom.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
+
+        private void NotifyUserMethod(NotificationMessage message)
+        {
+            MessageBox.Show(message.Notification);
+        } 
 
         /// <summary>
         /// Cleans up all the resources.

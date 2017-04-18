@@ -170,8 +170,6 @@
     </ApplicationDefinition>
     <Compile Include="Design\DesignMainWinService.cs" />
     <Compile Include="Model\MainWinData.cs" />
-    <Compile Include="Services\MainWinService.cs" />
-    <Compile Include="Services\IMainWinService.cs" />
     <Compile Include="ViewModel\IGeneralComands.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
@@ -247,6 +245,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="FullViews\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

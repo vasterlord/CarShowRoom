@@ -15,7 +15,7 @@ namespace CarShowRoom.Model
             {
                 _toolBarDescription = value;
             }
-        } 
+        }  
         public MainWinData()
         {
             ToolBarDescription = "Date and time:  ";

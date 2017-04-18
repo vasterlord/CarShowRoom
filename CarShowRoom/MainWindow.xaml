@@ -6,14 +6,13 @@
         xmlns:ignore="http://www.galasoft.ch/ignore"   
         xmlns:intr="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d ignore"
-        Height="280"
-        Width="320"
+        Height="315"
+        Width="367"
         Title="Start window" 
-        Icon="C:\Users\Yulian\Desktop\EntityProject\CarShowRoom\CarShowRoom\windowIcon.png"
-        DataContext="{Binding Main, Source={StaticResource Locator}}" ResizeMode="NoResize" 
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto">
+        Icon="C:\Users\Yulian\Desktop\EntityProject\CarShowRoom\CarShowRoom\windowIcon.png" 
+        Background="Gray"
+        DataContext="{Binding Main, Source={StaticResource Locator}}" ResizeMode="NoResize" >
+
     <intr:Interaction.Triggers>
         <intr:EventTrigger EventName="Loaded">
             <intr:InvokeCommandAction Command="{Binding WindowLoaded}"/>
@@ -27,59 +26,127 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-
-    <Grid x:Name="LayoutRoot"> 
+    <Grid x:Name="LayoutRoot" Background="Gray">
         <DockPanel>
-            <ToolBarTray DockPanel.Dock="Bottom" Height="16">
-                <ToolBar>
+            <ToolBarTray DockPanel.Dock="Bottom" Height="auto">
+                <ToolBar Width="379" HorizontalAlignment="Right" Margin="-9,0,-59,0">
                     <TextBlock  
-                   FontWeight='Regular' 
+                   FontWeight="Regular"
                    FontSize="12"
-                   Foreground="LightSeaGreen"
+                   Foreground="Yellow"
                    Text="{Binding ToolBarDescriptionItem}"
                    TextWrapping="Wrap" />
                     <TextBlock
-                   FontWeight='Regular'  
+                   FontWeight="Regular"
                    FontSize="12"
                    Text="{Binding ToolBarValueItem}"
-                   Foreground="Orange"
+                   Foreground="Cyan"
                    TextWrapping="Wrap" />
                 </ToolBar>
             </ToolBarTray>
             <TextBox AcceptsReturn="True" />
         </DockPanel>
-        <Image Margin="0,20,0,16" Stretch="Fill">
+        <Image Margin="0,25,0,20" Stretch="Fill">
             <Image.Source>
                 <BitmapImage UriSource="C:\Users\Yulian\Desktop\EntityProject\CarShowRoom\CarShowRoom\wall.jpg"/>
             </Image.Source>
         </Image>
         <DockPanel>
             <Menu DockPanel.Dock="Top" Height="auto">
-                <MenuItem Header="_Car brands" FontSize="13" Foreground="BlueViolet" Height="21">
+                <MenuItem Header="_Car brands" FontSize="13" Foreground="MintCream" Height="23">
                     <Separator/>
-                    <MenuItem Header="_Car brands data" FontSize="13" Foreground="Coral" Height="21"/>
+                    <MenuItem Header="_Car brands data" FontSize="13" Foreground="MintCream" Height="23">
+                        <MenuItem.Icon>
+                            <Image>
+                                <Image.Source>
+                                    <BitmapImage UriSource="C:\Users\Yulian\Desktop\EntityProject\CarShowRoom\CarShowRoom\brand3.png"/>
+                                </Image.Source>
+                            </Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <Separator/>
-                    <MenuItem Header="_Car brands report" FontSize="13" Foreground="LimeGreen" Height="21"/>
+                    <MenuItem Header="_Car brands report" FontSize="13" Foreground="MintCream" Height="23">
+                        <MenuItem.Icon>
+                            <Image>
+                                <Image.Source>
+                                    <BitmapImage UriSource="C:\Users\Yulian\Desktop\EntityProject\CarShowRoom\CarShowRoom\brand2.png"/>
+                                </Image.Source>
+                            </Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem.Icon>
+                        <Image>
+                            <Image.Source>
+                                <BitmapImage UriSource="C:\Users\Yulian\Desktop\EntityProject\CarShowRoom\CarShowRoom\lambo.png"/>
+                            </Image.Source>
+                        </Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="_Car show room" FontSize="13" Foreground="MintCream" Height="23">
+                    <MenuItem.Icon>
+                        <Image>
+                            <Image.Source>
+                                <BitmapImage UriSource="C:\Users\Yulian\Desktop\EntityProject\CarShowRoom\CarShowRoom\car.png"/>
+                            </Image.Source>
+                        </Image>
+                    </MenuItem.Icon>
+                    <Separator/>
+                    <MenuItem Header="_Car show room data" FontSize="13" Foreground="MintCream" Height="23">
+                        <MenuItem.Icon>
+                            <Image>
+                                <Image.Source>
+                                    <BitmapImage UriSource="C:\Users\Yulian\Desktop\EntityProject\CarShowRoom\CarShowRoom\car22.png"/>
+                                </Image.Source>
+                            </Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem Header="_Car show room report" FontSize="13" Foreground="MintCream" Height="23">
+                        <MenuItem.Icon>
+                            <Image>
+                                <Image.Source>
+                                    <BitmapImage UriSource="C:\Users\Yulian\Desktop\EntityProject\CarShowRoom\CarShowRoom\car3.png"/>
+                                </Image.Source>
+                            </Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <Separator/>
                 </MenuItem>
-                <MenuItem Header="_Car show room" FontSize="13" Foreground="LightPink" Height="21">
+                <MenuItem Header="_Clients" FontSize="13" Foreground="MintCream" Height="23">
                     <Separator/>
-                    <MenuItem Header="_Car show room data" FontSize="13" Foreground="Cyan" Height="21"/> 
+                    <MenuItem Header="_Clients data" FontSize="13" Foreground="MintCream" Height="23">
+                        <MenuItem.Icon>
+                            <Image>
+                                <Image.Source>
+                                    <BitmapImage UriSource="C:\Users\Yulian\Desktop\EntityProject\CarShowRoom\CarShowRoom\client2.png"/>
+                                </Image.Source>
+                            </Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <Separator/>
-                    <MenuItem Header="_Car show room report" FontSize="13" Foreground="Goldenrod" Height="21"/>
+                    <MenuItem Header="_Clients report" FontSize="13" Foreground="MintCream" Height="23">
+                        <MenuItem.Icon>
+                            <Image>
+                                <Image.Source>
+                                    <BitmapImage UriSource="C:\Users\Yulian\Desktop\EntityProject\CarShowRoom\CarShowRoom\client3.png"/>
+                                </Image.Source>
+                            </Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <Separator/>
-                </MenuItem>
-                <MenuItem Header="_Clients" FontSize="13" Foreground="MediumSpringGreen" Height="21">
-                    <Separator/>
-                    <MenuItem Header="_Clients data" FontSize="13" Foreground="LightBlue" Height="21"/>
-                    <Separator/>
-                    <MenuItem Header="_Clients report" FontSize="13" Foreground="LightCoral" Height="21"/>
-                    <Separator/>
+                    <MenuItem.Icon>
+                        <Image>
+                            <Image.Source>
+                                <BitmapImage UriSource="C:\Users\Yulian\Desktop\EntityProject\CarShowRoom\CarShowRoom\client.png"/>
+                            </Image.Source>
+                        </Image>
+                    </MenuItem.Icon>
                 </MenuItem>
             </Menu>
-            <TextBox AcceptsReturn="True" />
+            <TextBox AcceptsReturn="True" Visibility="Hidden" Height="228" VerticalAlignment="Top" />
         </DockPanel>
-        
+
 
     </Grid>
 </Window>
