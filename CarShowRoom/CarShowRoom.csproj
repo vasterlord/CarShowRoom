@@ -168,8 +168,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Design\DesignMainWinService.cs" />
-    <Compile Include="Model\MainWinData.cs" />
+    <Compile Include="DesignMode\MainWindowMode.cs" />
+    <Compile Include="Model\MainWinowData.cs" />
     <Compile Include="ViewModel\IGeneralComands.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="DataSource\ViewModelLocator.cs" />

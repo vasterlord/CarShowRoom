@@ -7,6 +7,7 @@ using System;
 using GalaSoft.MvvmLight.Command;
 using Xceed.Wpf.Toolkit;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace CarShowRoom.ViewModel
 {
@@ -19,34 +20,6 @@ namespace CarShowRoom.ViewModel
     public class MainViewModel : ViewModelBase , INotifyPropertyChanged
     {
         private string _toolBarDescriptionItem = string.Empty;
-        private string name;
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-            set
-            {
-                Set<string>(() => this.Name, ref name, value);
-            }
-        } 
-
-        private string userName;
-        public string UserName
-        {
-            get { return this.userName; }
-            set
-            {
-                // Implement with property changed handling for INotifyPropertyChanged
-                if (!string.Equals(this.userName, value))
-                {
-                    this.userName = value;
-                    Name = value;
-                    //this.RaisePropertyChanged(); // Method to raise the PropertyChanged event in your BaseViewModel class...
-                }
-            }
-        }
         public string ToolBarDescriptionItem
         {
             get
@@ -74,17 +47,15 @@ namespace CarShowRoom.ViewModel
         }
 
         public ICommand WindowLoaded {get; set; }
-        public ICommand Changed { get; set; }
 
         public MainViewModel()
         {
-            MainWinData item = new MainWinData();
+            MainWinowData item = new MainWinowData();
             item.ToolBarDescription = "Date and time:  ";
             DispatcherTimer timer = new DispatcherTimer();
             timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
             WindowLoaded = new RelayCommand(OnLoaded);
-            Changed = new RelayCommand(OnChanged);
             ToolBarDescriptionItem = item.ToolBarDescription; 
         }
         private void timer_Tick(object sender, EventArgs e)
@@ -94,13 +65,7 @@ namespace CarShowRoom.ViewModel
 
         public void OnLoaded()
         {
-            MessageBox.Show("Program loaded", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
-        }
-
-        public void OnChanged()
-        {
-            MessageBox.Show(UserName, "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
-            Name = "New User";
+            Debug.Print("Program loaded");
         }
 
         ////public override void Cleanup()

@@ -13,6 +13,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using CarShowRoom.Model;
+using CarShowRoom.DesignMode;
 using CarShowRoom.ViewModel;
 using GalaSoft.MvvmLight.Messaging;
 using Xceed.Wpf.Toolkit;
@@ -34,7 +35,7 @@ namespace CarShowRoom.DataSource
 
             if (ViewModelBase.IsInDesignModeStatic)
             {
-                SimpleIoc.Default.Register<Design.DesignMainWinService>();
+                SimpleIoc.Default.Register<DesignMode.MainWindowMode>();
             }
             SimpleIoc.Default.Register<MainViewModel>();
             Messenger.Default.Register<NotificationMessage>(this, NotifyUserMethod);

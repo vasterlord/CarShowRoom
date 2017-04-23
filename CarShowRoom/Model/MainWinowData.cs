@@ -2,7 +2,7 @@
 using System;
 namespace CarShowRoom.Model
 {
-    public class MainWinData
+    public class MainWinowData
     {
         private string _toolBarDescription;
         public string ToolBarDescription
@@ -16,7 +16,7 @@ namespace CarShowRoom.Model
                 _toolBarDescription = value;
             }
         }  
-        public MainWinData()
+        public MainWinowData()
         {
             ToolBarDescription = "Date and time:  ";
         }
