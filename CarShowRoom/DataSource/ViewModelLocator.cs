@@ -7,16 +7,17 @@
   
   In the View:
   DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
-*/
+*/ 
 
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using CarShowRoom.Model;
+using CarShowRoom.ViewModel;
 using GalaSoft.MvvmLight.Messaging;
 using Xceed.Wpf.Toolkit;
 
-namespace CarShowRoom.ViewModel
+namespace CarShowRoom.DataSource
 {
     /// <summary>
     /// This class contains static references to all the view models in the

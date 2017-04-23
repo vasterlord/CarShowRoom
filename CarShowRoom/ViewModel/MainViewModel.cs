@@ -19,7 +19,34 @@ namespace CarShowRoom.ViewModel
     public class MainViewModel : ViewModelBase , INotifyPropertyChanged
     {
         private string _toolBarDescriptionItem = string.Empty;
+        private string name;
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                Set<string>(() => this.Name, ref name, value);
+            }
+        } 
 
+        private string userName;
+        public string UserName
+        {
+            get { return this.userName; }
+            set
+            {
+                // Implement with property changed handling for INotifyPropertyChanged
+                if (!string.Equals(this.userName, value))
+                {
+                    this.userName = value;
+                    Name = value;
+                    //this.RaisePropertyChanged(); // Method to raise the PropertyChanged event in your BaseViewModel class...
+                }
+            }
+        }
         public string ToolBarDescriptionItem
         {
             get
@@ -29,6 +56,7 @@ namespace CarShowRoom.ViewModel
             set
             {
                 Set(ref _toolBarDescriptionItem, value);
+               
             }
         }
         private string _toolBarValueItem = string.Empty;
@@ -46,6 +74,7 @@ namespace CarShowRoom.ViewModel
         }
 
         public ICommand WindowLoaded {get; set; }
+        public ICommand Changed { get; set; }
 
         public MainViewModel()
         {
@@ -54,8 +83,9 @@ namespace CarShowRoom.ViewModel
             DispatcherTimer timer = new DispatcherTimer();
             timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
-            WindowLoaded = new RelayCommand(OnLoaded); 
-           ToolBarDescriptionItem = item.ToolBarDescription; 
+            WindowLoaded = new RelayCommand(OnLoaded);
+            Changed = new RelayCommand(OnChanged);
+            ToolBarDescriptionItem = item.ToolBarDescription; 
         }
         private void timer_Tick(object sender, EventArgs e)
         {
@@ -65,6 +95,12 @@ namespace CarShowRoom.ViewModel
         public void OnLoaded()
         {
             MessageBox.Show("Program loaded", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+        }
+
+        public void OnChanged()
+        {
+            MessageBox.Show(UserName, "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+            Name = "New User";
         }
 
         ////public override void Cleanup()

@@ -1,9 +1,10 @@
 ﻿using System.Windows;
 using CarShowRoom.ViewModel;
+using CarShowRoom.DataSource;
 using System.Windows.Threading;
 using System;
 
-namespace CarShowRoom
+namespace CarShowRoom.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -18,5 +19,6 @@ namespace CarShowRoom
             InitializeComponent();
             Closing += (s, e) => ViewModelLocator.Cleanup();
         }
+
     }
 }
