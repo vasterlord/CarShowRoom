@@ -1,7 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using CarShowRoom.Model;
 using System.Windows.Input;
-using Microsoft.Practices.Prism.Commands;
 using System.Windows.Threading;
 using System;
 using GalaSoft.MvvmLight.Command;
