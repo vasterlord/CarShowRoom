@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using CarShowRoom.DataSource;
+using CarShowRoom.Model;
+using System.Windows;
 
 namespace CarShowRoom.View
 {
@@ -13,6 +15,7 @@ namespace CarShowRoom.View
         public CarBrandView()
         {
             InitializeComponent();
+            
         }
     }
 }

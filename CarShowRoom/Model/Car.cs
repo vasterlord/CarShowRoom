@@ -16,7 +16,6 @@ namespace CarShowRoom.Model
         private double _fuelPerHundredKm;
         private int _productionYear;
         private double _price;
-        private byte[] _photo;
 
         public int Id { get; set; }
         public int CarBrandId { get; set; }
@@ -109,7 +108,7 @@ namespace CarShowRoom.Model
         }
 
         [ConcurrencyCheck]
-        [StringLength(4, ErrorMessage = "The length of the date must be correctly")]
+        [Required(ErrorMessage = "Field can't be null")]
         public int ProductionYear
         {
             get
@@ -133,19 +132,6 @@ namespace CarShowRoom.Model
             set
             {
                 Set<double>(() => this.Price, ref _price, value);
-            }
-        } 
-
-        [ConcurrencyCheck]
-        public byte[] Photo
-        {
-            get
-            {
-                return _photo;
-            }
-            set
-            {
-                Set(ref _photo, value);
             }
         } 
          

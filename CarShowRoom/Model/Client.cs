@@ -64,7 +64,6 @@ namespace CarShowRoom.Model
         } 
 
         [ConcurrencyCheck]
-        [StringLength(10, ErrorMessage = "The length of the date must be correctly")]
         public DateTime DateBuy
         {
             get

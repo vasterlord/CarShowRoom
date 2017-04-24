@@ -12,6 +12,7 @@ namespace CarShowRoom.Model
         private string _brand;
         private string _countryProducing; 
         private DateTime _foundationYear;
+        private byte[] _logo;
 
         public int Id { get; set; }
 
@@ -45,10 +46,9 @@ namespace CarShowRoom.Model
             {
                 Set<string>(() => this.CountryProducing, ref _countryProducing, value);
             }
-        } 
+        }
 
         [ConcurrencyCheck]
-        [StringLength(10, ErrorMessage = "The length of the date must be correctly")]
         public DateTime FoundationYear
         {
             get
@@ -61,12 +61,25 @@ namespace CarShowRoom.Model
             }
         }
 
+        [ConcurrencyCheck]
+        public byte[] Logo
+        {
+            get
+            {
+                return _logo;
+            }
+            set
+            {
+                Set(ref _logo, value);
+            }
+        }
+
         public CarBrand()
         {
-            Car = new ObservableCollection<Car>();
+            Cars = new ObservableCollection<Car>();
         } 
 
-        public ObservableCollection<Car> Car { get; set; }
+        public ObservableCollection<Car> Cars { get; set; }
 
     }
 }

@@ -9,10 +9,15 @@
         mc:Ignorable="d ignore"   
         xmlns:dataviews="http://mindfusion.eu/dataviews/wpf"  
         Icon="C:\Users\Yulian\Desktop\EntityProject\CarShowRoom\CarShowRoom\brand3.png" 
-        WindowStyle="ToolWindow" 
+        Background="MintCream" 
         ResizeMode="NoResize"  
         Title="Car brands data"
-        DataContext="{Binding CarBrandMain, Source={StaticResource Locator}}" >
+        DataContext="{Binding CarBrandMain, Source={StaticResource Locator}}" Width="997" Height="650">
+    <intr:Interaction.Triggers>
+        <intr:EventTrigger EventName="Loaded">
+            <intr:InvokeCommandAction Command="{Binding WindowLoaded}"/>
+        </intr:EventTrigger>
+    </intr:Interaction.Triggers>
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -21,6 +26,102 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="484,404,0,0" VerticalAlignment="Top" Width="75"/>
+        <DataGrid x:Name="dataGrid" 
+                  ItemsSource="{Binding CarBrands}"  SelectedItem="{Binding SelectedCarBrand}"
+                  Width="356"
+                  Height="187"
+                  Margin="20,114,0,0"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top"
+                  BorderBrush="Lime"
+                  BorderThickness="2"
+                  CanUserAddRows="False" 
+                  CanUserReorderColumns="False"
+                  CanUserResizeColumns="False"
+                  CanUserSortColumns="True"
+                  EnableColumnVirtualization="false"
+                  EnableRowVirtualization="false"
+                  HorizontalScrollBarVisibility="Visible"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  VerticalScrollBarVisibility="Visible" >
+            <DataGrid.Effect>
+                <DropShadowEffect BlurRadius="100" Color="LightCyan" />
+            </DataGrid.Effect>
+            <intr:Interaction.Triggers>
+                <intr:EventTrigger EventName="AutoGeneratingColumn">
+                    <intr:InvokeCommandAction Command="{Binding DatagridAutoGenColumns}"/>
+                </intr:EventTrigger>
+            </intr:Interaction.Triggers>
+        </DataGrid>
+        <Label x:Name="label" Content="Country producing" HorizontalAlignment="Left" Margin="407,164,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_Search"  HorizontalAlignment="Left" Height="23" Margin="246,25,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120">
+            <TextBox.Style>
+                <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                    <Style.Resources>
+                        <VisualBrush x:Key="NormalBorderBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                            <VisualBrush.Visual>
+                                <Label Content="Input your value" Foreground="DimGray" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Style.Resources>
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                            <Setter Property="Background" Value="{StaticResource NormalBorderBrush}" />
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource NormalBorderBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Background" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <TextBox x:Name="textBox_Country" Text="{Binding SelectedCarBrand.CountryProducing}" HorizontalAlignment="Left" Height="24" Margin="535,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label1" Content="Car brand" HorizontalAlignment="Left" Margin="407,123,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_Brand" Text="{Binding SelectedCarBrand.Brand}" HorizontalAlignment="Left" Height="23" Margin="535,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label2" Content="Year foundation" HorizontalAlignment="Left" Margin="407,209,0,0" VerticalAlignment="Top"/>
+        <DatePicker HorizontalAlignment="Left" Margin="535,205,0,0" Text="{Binding SelectedCarBrand.FoundationYear}" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label3" Content="Search by" HorizontalAlignment="Left" Margin="35,28,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="comboBox_Search" HorizontalAlignment="Left" Margin="105,28,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0"/>
+        <Border BorderBrush="#FFAE15BD" BorderThickness="3" HorizontalAlignment="Left" Height="54" Margin="20,10,0,0" VerticalAlignment="Top" Width="356"/>
+        <Label x:Name="label4" Content="Fliter by" HorizontalAlignment="Left" Margin="427,28,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="comboBox_Filter" SelectedIndex="0" HorizontalAlignment="Left" Margin="490,28,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="comboBox_Operation" SelectedIndex="0" HorizontalAlignment="Left" Margin="633,28,0,0" VerticalAlignment="Top" Width="43"/>
+        <TextBox x:Name="textBox_Filter"  HorizontalAlignment="Left" Height="23" Margin="700,25,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120">
+            <TextBox.Style>
+                <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                    <Style.Resources>
+                        <VisualBrush x:Key="NormalBorderBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                            <VisualBrush.Visual>
+                                <Label Content="Input your value" Foreground="DimGray" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Style.Resources>
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                            <Setter Property="Background" Value="{StaticResource NormalBorderBrush}" />
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource NormalBorderBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Background" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <Border BorderBrush="#FFFF9414" BorderThickness="3" HorizontalAlignment="Left" Height="54" Margin="407,10,0,0" VerticalAlignment="Top" Width="574"/>
+        <Button x:Name="button_New" Content="New" FontStretch="Medium" FontWeight="Medium" FontSize="15" FontFamily="Italic" HorizontalAlignment="Left" Margin="407,277,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="button_Filter" Content="Apply fliter" FontStretch="Medium" FontWeight="Medium" FontSize="15" FontFamily="Italic" HorizontalAlignment="Left" Margin="842,25,0,0" VerticalAlignment="Top" Width="119"/>
+        <Button x:Name="button_Save" Content="Save" FontStretch="Medium" FontWeight="Medium" FontSize="15" FontFamily="Italic" HorizontalAlignment="Left" Margin="580,277,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="button_Logo" Content="Load logo" FontStretch="Medium" FontWeight="Medium" FontSize="15" FontFamily="Italic" HorizontalAlignment="Left" Margin="906,277,0,0" VerticalAlignment="Top" Width="75"/>
+        <Border BorderThickness="2" BorderBrush="Crimson" HorizontalAlignment="Left" Height="187" Margin="678,114,0,0" VerticalAlignment="Top" Width="219">
+            <Image x:Name="image" HorizontalAlignment="Left" Height="187" Margin="-1,-1,-2,-3" VerticalAlignment="Top" Width="218"/>
+        </Border>
+
     </Grid>
 </Window>
