@@ -35,9 +35,15 @@ namespace CarShowRoom.DataSource
 
             if (ViewModelBase.IsInDesignModeStatic)
             {
-                SimpleIoc.Default.Register<DesignMode.MainWindowMode>();
+                SimpleIoc.Default.Register<DesignMode.MainWindowDesign>();
+                SimpleIoc.Default.Register<DesignMode.CarBrandDesign>();
+                SimpleIoc.Default.Register<DesignMode.CarDesign>();
+                SimpleIoc.Default.Register<DesignMode.ClientDesign>();
             }
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<CarBrandViewModel>();
+            SimpleIoc.Default.Register<CarViewModel>();
+            SimpleIoc.Default.Register<ClientViewModel>();
             Messenger.Default.Register<NotificationMessage>(this, NotifyUserMethod);
         }
 
@@ -49,6 +55,30 @@ namespace CarShowRoom.DataSource
             get
             {
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
+            }
+        }
+
+        public CarBrandViewModel CarBrandMain
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<CarBrandViewModel>();
+            }
+        } 
+
+        public CarViewModel CarMain
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<CarViewModel>();
+            }
+        }
+
+        public ClientViewModel ClientMain
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ClientViewModel>();
             }
         }
 

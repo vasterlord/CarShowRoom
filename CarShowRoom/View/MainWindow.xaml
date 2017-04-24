@@ -57,7 +57,7 @@
             <Menu DockPanel.Dock="Top" Height="auto">
                 <MenuItem Header="_Car brands" FontSize="13" Foreground="MintCream" Height="23">
                     <Separator/>
-                    <MenuItem Header="_Car brands data" FontSize="13" Foreground="MintCream" Height="23">
+                    <MenuItem Header="_Car brands data" FontSize="13" Foreground="MintCream" Height="23" Command="{Binding CarBrandLoad}">
                         <MenuItem.Icon>
                             <Image>
                                 <Image.Source>

@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using CarShowRoom.Model;
+using CarShowRoom.View;
 using System.Windows.Input;
 using System.Windows.Threading;
 using System;
@@ -46,16 +47,19 @@ namespace CarShowRoom.ViewModel
         }
 
         public ICommand WindowLoaded {get; set; }
+        public ICommand CarBrandLoad { get; set; }
 
         public MainViewModel()
         {
-            MainWinowData item = new MainWinowData();
+            MainWinowModel item = new MainWinowModel();
             item.ToolBarDescription = "Date and time:  ";
             DispatcherTimer timer = new DispatcherTimer();
             timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
+            ToolBarDescriptionItem = item.ToolBarDescription;   
+
             WindowLoaded = new RelayCommand(OnLoaded);
-            ToolBarDescriptionItem = item.ToolBarDescription; 
+            CarBrandLoad = new RelayCommand(CarBrandStart);
         }
         private void timer_Tick(object sender, EventArgs e)
         {
@@ -66,6 +70,12 @@ namespace CarShowRoom.ViewModel
         {
             Debug.Print("Program loaded");
         }
+
+        public void CarBrandStart()
+        {
+            CarBrandView carBrandView = new CarBrandView();
+            carBrandView.ShowDialog();
+        } 
 
         ////public override void Cleanup()
         ////{

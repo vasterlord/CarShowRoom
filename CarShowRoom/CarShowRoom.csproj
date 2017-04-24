@@ -120,11 +120,28 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DesignMode\MainWindowMode.cs" />
-    <Compile Include="Model\MainWinowData.cs" />
+    <Compile Include="DesignMode\CarBrandDesign.cs" />
+    <Compile Include="DesignMode\CarDesign.cs" />
+    <Compile Include="DesignMode\ClientDesign.cs" />
+    <Compile Include="DesignMode\MainWindowDesign.cs" />
+    <Compile Include="Model\Car.cs" />
+    <Compile Include="Model\CarBrand.cs" />
+    <Compile Include="Model\Client.cs" />
+    <Compile Include="Model\MainWinowModel.cs" />
+    <Compile Include="ViewModel\CarViewModel.cs" />
+    <Compile Include="ViewModel\CarBrandViewModel.cs" />
+    <Compile Include="ViewModel\ClientViewModel.cs" />
     <Compile Include="ViewModel\IGeneralComands.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="DataSource\ViewModelLocator.cs" />
+    <Page Include="Skins\CarBrandSkin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CarBrandView.xaml">
+      <SubType>Form</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -132,6 +149,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="View\CarBrandView.xaml.cs">
+      <DependentUpon>CarBrandView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
