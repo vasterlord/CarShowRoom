@@ -11,7 +11,7 @@ namespace CarShowRoom.Model
     {
         private string _brand;
         private string _countryProducing; 
-        private DateTime _foundationYear;
+        private int _foundationYear;
         private byte[] _logo;
 
         public int Id { get; set; }
@@ -49,7 +49,7 @@ namespace CarShowRoom.Model
         }
 
         [ConcurrencyCheck]
-        public DateTime FoundationYear
+        public int FoundationYear
         {
             get
             {
@@ -57,7 +57,7 @@ namespace CarShowRoom.Model
             } 
             set
             {
-                Set<DateTime>(() => this.FoundationYear, ref _foundationYear, value);
+                Set<int>(() => this.FoundationYear, ref _foundationYear, value);
             }
         }
 

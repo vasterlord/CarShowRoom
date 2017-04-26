@@ -1,6 +1,9 @@
 ﻿using CarShowRoom.DataSource;
 using CarShowRoom.Model;
+using System;
+using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace CarShowRoom.View
 {
@@ -15,7 +18,17 @@ namespace CarShowRoom.View
         public CarBrandView()
         {
             InitializeComponent();
-            
+        }
+
+        private void dataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.Column.Header.ToString().ToLower() == "id"||  
+                e.Column.Header.ToString().ToLower() == "logo"||
+                e.Column.Header.ToString().ToLower() == "carbrands")
+            {
+                e.Column.Visibility = Visibility.Collapsed;
+            }
         }
     }
+
 }

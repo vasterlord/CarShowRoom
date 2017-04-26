@@ -9,7 +9,8 @@ namespace CarShowRoom.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
             ContextKey = "CarShowRoom.DataSource.Context";
         }
 

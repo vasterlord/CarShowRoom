@@ -11,25 +11,32 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-
+using System.Windows.Data;
 namespace CarShowRoom.ViewModel
 {
 
     public class CarBrandViewModel : ViewModelBase, INotifyPropertyChanged
-    {
-        private ObservableCollection<CarBrand> _carBrands;
-        private CarBrand _selectedCarBrand; 
+    { 
+        //<intr:Interaction.Triggers>
+        //        <intr:EventTrigger EventName = "AutoGeneratingColumn" >
+        //            < cmd:EventToCommand Command = "{Binding Auto}"
+        //                                PassEventArgsToCommand="True"/>
+        //        </intr:EventTrigger>
+        //    </intr:Interaction.Triggers>  
 
-        public ICommand DatagridAutoGenColumns { get; set; }
-        public ICommand WindowLoaded { get; set; } 
-         
+        public ICommand WindowLoaded { get; set; }
+
+        public ObservableCollection<CarBrand> _carBrands;
+        private CarBrand _selectedCarBrand;  
+
         public ObservableCollection<CarBrand> CarBrands
         {
             get
             {
                 return _carBrands;
-            }
+            } 
         }  
+
 
         public CarBrand SelectedCarBrand
         {
@@ -40,40 +47,22 @@ namespace CarShowRoom.ViewModel
             set
             {
                 _selectedCarBrand = value;
-                RaisePropertyChanged("SelectedCarBrand");
+                this.RaisePropertyChanged("SelectedCarBrand");
             }
         } 
 
         public CarBrandViewModel()
         {
             WindowLoaded = new RelayCommand(onLoad);
-            DatagridAutoGenColumns = new RelayCommand<DataGridAutoGeneratingColumnEventArgs>(dataGrid_AutoGeneratingColumn); 
-        }
-
-        private void dataGrid_AutoGeneratingColumn(DataGridAutoGeneratingColumnEventArgs e)
-        {
-            e.Column.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
         }
 
         public void onLoad()
         {
             LoadCarBrand();
-            if (_carBrands != null)
-            {
-                ConfigDataGrid();
-            }
         } 
         /// <summary>
-        /// Dont work!!!
+        /// Helped logic
         /// </summary>
-        public void ConfigDataGrid()
-        {
-            CarBrandView carBrandView = new CarBrandView();
-            //carBrandView.dataGrid.Columns[0].Visibility = Visibility.Collapsed;
-            //carBrandView.dataGrid.Columns[4].Visibility = Visibility.Collapsed;
-            //carBrandView.dataGrid.Columns[5].Visibility = Visibility.Collapsed;
-            carBrandView.dataGrid.SelectedIndex = 0;
-        } 
         public void LoadCarBrand()
         {
             using (var context = new Context())
