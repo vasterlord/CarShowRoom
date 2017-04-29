@@ -11,19 +11,7 @@
     <Application.Resources>
         <!--Global View Model Locator-->
         <vm:ViewModelLocator x:Key="Locator"
-                             d:IsDataSource="True" /> 
-        
-        <Style TargetType="{x:Type ToolTip}">
-            <Setter Property="OverridesDefaultStyle" Value="True" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ToolTip}" >
-                        <TextBox Background="LightBlue" Width="200" TextWrapping="WrapWithOverflow" Text="{TemplateBinding ToolTip.Content}" />
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style> 
-        
+                             d:IsDataSource="True" />
     </Application.Resources>
     
 </Application>

@@ -11,7 +11,7 @@ namespace CarShowRoom.Model
     {
         private string _brand;
         private string _countryProducing; 
-        private int _foundationYear;
+        private int? _foundationYear;
         private byte[] _logo;
 
         public int Id { get; set; }
@@ -48,8 +48,10 @@ namespace CarShowRoom.Model
             }
         }
 
-        [ConcurrencyCheck]
-        public int FoundationYear
+        [ConcurrencyCheck] 
+        [Required(ErrorMessage = "Field can't be null")]
+        [Range(1700, 2025, ErrorMessage = "Incorrect year")]
+        public int? FoundationYear
         {
             get
             {
@@ -57,7 +59,7 @@ namespace CarShowRoom.Model
             } 
             set
             {
-                Set<int>(() => this.FoundationYear, ref _foundationYear, value);
+                Set<int?>(() => this.FoundationYear, ref _foundationYear, value);
             }
         }
 

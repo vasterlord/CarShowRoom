@@ -64,6 +64,7 @@ namespace CarShowRoom.Model
         } 
 
         [ConcurrencyCheck]
+        [Required(ErrorMessage = "Field can't be null")]
         public DateTime DateBuy
         {
             get

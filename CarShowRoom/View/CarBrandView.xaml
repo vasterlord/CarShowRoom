@@ -10,10 +10,9 @@
         mc:Ignorable="d ignore"   
         xmlns:dataviews="http://mindfusion.eu/dataviews/wpf"  
         Icon="C:\Users\Yulian\Desktop\EntityProject\CarShowRoom\CarShowRoom\brand3.png" 
-        Background="MintCream" 
         ResizeMode="NoResize"  
-        Title="Car brands data"
-        DataContext="{Binding CarBrandMain, Source={StaticResource Locator}}" Width="1060" Height="650">
+        Title="Car brands data" Background="Black"
+        DataContext="{Binding CarBrandMain, Source={StaticResource Locator}}" Width="1104" Height="632">
     <intr:Interaction.Triggers>
         <intr:EventTrigger EventName="Loaded">
             <intr:InvokeCommandAction Command="{Binding WindowLoaded}"/>
@@ -30,8 +29,8 @@
         <DataGrid x:Name="dataGrid"   
                   ItemsSource="{Binding CarBrands}"  
                   SelectedItem="{Binding SelectedCarBrand}"
-                  Width="389"
-                  Height="186"
+                  Width="457"
+                  Height="202"
                   Margin="20,84,0,0"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Top"
@@ -40,7 +39,7 @@
                   Background="#FFD7F9F9"
                   BorderBrush="Lime" 
                   AutoGenerateColumns="True"
-                  BorderThickness="2"
+                  BorderThickness="3"
                   CanUserAddRows="False"
                   CanUserReorderColumns="False"
                   CanUserResizeColumns="False"
@@ -51,87 +50,109 @@
                   HorizontalGridLinesBrush="Violet"
                   HorizontalScrollBarVisibility="Visible"
                   IsReadOnly="True"
-                  RowBackground="MistyRose"
-                  SelectionMode="Single"
+                  RowBackground="MistyRose" 
+                  SelectedIndex="{Binding SelectedIndexValue,UpdateSourceTrigger=PropertyChanged}" 
+                  SelectionMode="Single" 
                   VerticalGridLinesBrush="Crimson"
-                  VerticalScrollBarVisibility="Visible"  
-                  ColumnWidth="1*" SelectedIndex="0">
+                  VerticalScrollBarVisibility="Visible" 
+                  ColumnWidth="1*">
             <DataGrid.Effect>
-                <DropShadowEffect BlurRadius="100" Color="LightCyan" />
+                <DropShadowEffect BlurRadius="150" Color="LimeGreen" />
             </DataGrid.Effect>
         </DataGrid>
-        <Label x:Name="label" Content="Country producing" HorizontalAlignment="Left" Margin="480,133,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox_Search"  HorizontalAlignment="Left" Height="23" Margin="246,25,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120">
-            <TextBox.Style>
-                <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-                    <Style.Resources>
-                        <VisualBrush x:Key="NormalBorderBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
-                            <VisualBrush.Visual>
-                                <Label Content="Input your value" Foreground="DimGray" />
-                            </VisualBrush.Visual>
-                        </VisualBrush>
-                    </Style.Resources>
-                    <Style.Triggers>
-                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
-                            <Setter Property="Background" Value="{StaticResource NormalBorderBrush}" />
-                        </Trigger>
-                        <Trigger Property="Text" Value="{x:Null}">
-                            <Setter Property="Background" Value="{StaticResource NormalBorderBrush}" />
-                        </Trigger>
-                        <Trigger Property="IsKeyboardFocused" Value="True">
-                            <Setter Property="Background" Value="White" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBox.Style>
+        <Label x:Name="label" Foreground="MintCream" Content="Country producing" HorizontalAlignment="Left" Margin="518,171,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_Country" Text="{Binding SelectedCarBrand.CountryProducing , UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="24" Margin="646,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label1" Foreground="MintCream" Content="Car brand" HorizontalAlignment="Left" Margin="518,130,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_Brand" Text="{Binding SelectedCarBrand.Brand , UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="646,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120">
         </TextBox>
-        <TextBox x:Name="textBox_Country" Text="{Binding SelectedCarBrand.CountryProducing}" HorizontalAlignment="Left" Height="24" Margin="608,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="label1" Content="Car brand" HorizontalAlignment="Left" Margin="480,86,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox_Brand" Text="{Binding SelectedCarBrand.Brand}" HorizontalAlignment="Left" Height="23" Margin="608,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="label2" Content="Year foundation" HorizontalAlignment="Left" Margin="480,172,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label3" Content="Search by" HorizontalAlignment="Left" Margin="35,28,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="comboBox_Search" HorizontalAlignment="Left" Margin="105,28,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0"/>
-        <Border BorderBrush="#FFAE15BD" BorderThickness="3" HorizontalAlignment="Left" Height="54" Margin="20,10,0,0" VerticalAlignment="Top" Width="356"/>
-        <Label x:Name="label4" Content="Fliter by" HorizontalAlignment="Left" Margin="427,28,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="comboBox_Filter" SelectedIndex="0" HorizontalAlignment="Left" Margin="490,28,0,0" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="comboBox_Operation" SelectedIndex="0" HorizontalAlignment="Left" Margin="633,28,0,0" VerticalAlignment="Top" Width="43"/>
-        <TextBox x:Name="textBox_Filter"  HorizontalAlignment="Left" Height="23" Margin="700,25,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120">
-            <TextBox.Style>
-                <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-                    <Style.Resources>
-                        <VisualBrush x:Key="NormalBorderBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
-                            <VisualBrush.Visual>
-                                <Label Content="Input your value" Foreground="DimGray" />
-                            </VisualBrush.Visual>
-                        </VisualBrush>
-                    </Style.Resources>
-                    <Style.Triggers>
-                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
-                            <Setter Property="Background" Value="{StaticResource NormalBorderBrush}" />
-                        </Trigger>
-                        <Trigger Property="Text" Value="{x:Null}">
-                            <Setter Property="Background" Value="{StaticResource NormalBorderBrush}" />
-                        </Trigger>
-                        <Trigger Property="IsKeyboardFocused" Value="True">
-                            <Setter Property="Background" Value="White" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBox.Style>
+        <Label x:Name="label2" Foreground="MintCream" Content="Year foundation" HorizontalAlignment="Left" Margin="518,214,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label3" Foreground="MintCream" Content="Search by" HorizontalAlignment="Left" Margin="41,28,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="comboBox_Search"  ItemsSource="{Binding Options}" Text="{Binding FindingOption, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding FindingOption, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Margin="111,28,0,0" VerticalAlignment="Top" Width="113" SelectedIndex="0">
+            <intr:Interaction.Triggers>
+                <intr:EventTrigger EventName="SelectionChanged">
+                    <intr:InvokeCommandAction Command="{Binding SearchPress}"/>
+                </intr:EventTrigger>
+            </intr:Interaction.Triggers>
+        </ComboBox>
+        <Border BorderBrush="#FFAE15BD" BorderThickness="3" HorizontalAlignment="Left" Height="54" Margin="22,10,0,0" VerticalAlignment="Top" Width="455"/>
+        <Button x:Name="button_New" Command="{Binding NewClick}" Content="New" FontStretch="Medium" FontWeight="Medium" FontSize="15" FontFamily="Italic" HorizontalAlignment="Left" Margin="520,262,0,0" VerticalAlignment="Top" Width="76"/>
+        <Button x:Name="button_Save" Content="Save" Command="{Binding SaveClick}" FontStretch="Medium" FontWeight="Medium" FontSize="15" FontFamily="Italic" HorizontalAlignment="Left" Margin="694,262,0,0" VerticalAlignment="Top" Width="74"/>
+        <Button x:Name="button_Delete" Command="{Binding DeleteClick}" Content="Delete" FontStretch="Medium" FontWeight="Medium" FontSize="15" FontFamily="Italic" HorizontalAlignment="Left" Margin="608,262,0,0" VerticalAlignment="Top" Width="74"/>
+        <TextBox x:Name="textBox_Year" HorizontalAlignment="Left" Height="23" Margin="646,210,0,0" TextWrapping="Wrap" Text="{Binding SelectedCarBrand.FoundationYear , UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBox_Search" Text="{Binding FindingValue, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="240,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120">
+            <intr:Interaction.Triggers>
+                <intr:EventTrigger EventName="TextChanged">
+                    <intr:InvokeCommandAction Command="{Binding SearchPress}"/>
+                </intr:EventTrigger>
+            </intr:Interaction.Triggers>
         </TextBox>
-        <Border BorderBrush="#FFFF9414" BorderThickness="3" HorizontalAlignment="Left" Height="54" Margin="407,10,0,0" VerticalAlignment="Top" Width="574"/>
-        <Button x:Name="button_New" Content="New" FontStretch="Medium" FontWeight="Medium" FontSize="15" FontFamily="Italic" HorizontalAlignment="Left" Margin="472,246,0,0" VerticalAlignment="Top" Width="76"/>
-        <Button x:Name="button_Filter" Content="Apply fliter" FontStretch="Medium" FontWeight="Medium" FontSize="15" FontFamily="Italic" HorizontalAlignment="Left" Margin="842,25,0,0" VerticalAlignment="Top" Width="119"/>
-        <Button x:Name="button_Save" Content="Save" FontStretch="Medium" FontWeight="Medium" FontSize="15" FontFamily="Italic" HorizontalAlignment="Left" Margin="646,246,0,0" VerticalAlignment="Top" Width="74"/>
-        <Button x:Name="button_Delete" Content="Delete" FontStretch="Medium" FontWeight="Medium" FontSize="15" FontFamily="Italic" HorizontalAlignment="Left" Margin="560,246,0,0" VerticalAlignment="Top" Width="74"/>
-        <Border BorderThickness="2" BorderBrush="Crimson" HorizontalAlignment="Left" Height="187" Margin="758,76,0,0" VerticalAlignment="Top" Width="218">
-            <Image x:Name="image"  HorizontalAlignment="Left" Height="187" Margin="-1,-1,-2,-3" VerticalAlignment="Top" Width="218">
-                <Image.ToolTip>
-                    <ToolTip Content="If you want add logo of this car brand - do double click in crimson frame" />
-                </Image.ToolTip>
-            </Image>
+        <Border BorderThickness="2"  BorderBrush="Blue" HorizontalAlignment="Left" Height="276" Margin="803,10,0,0" VerticalAlignment="Top" Width="268">
         </Border>
-        <TextBox x:Name="textBox_Year" HorizontalAlignment="Left" Height="23" Margin="608,172,0,0" TextWrapping="Wrap" Text="{Binding SelectedCarBrand.FoundationYear}" VerticalAlignment="Top" Width="120"/>
-
+        <Image x:Name="image" HorizontalAlignment="Left"  RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Stretch = "Fill" Source="{Binding SelectedCarBrand.Logo ,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"  Height="276" Margin="803,10,0,0" VerticalAlignment="Top" Width="268"></Image>
+        <TextBox x:Name="textBox_Id" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="646,84,0,0" TextWrapping="Wrap" Text="{Binding SelectedCarBrand.Id}" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label5" Content="Id" Foreground="MintCream" HorizontalAlignment="Left" Margin="518,91,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="dataGrid_Cars"   
+                  ItemsSource="{Binding SelectedCarBrand.Cars}"  
+                  Width="1051"
+                  Height="202"
+                  Margin="20,375,0,0"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top"
+                  AlternatingRowBackground="LightBlue"
+                  AutoGeneratingColumn="dataGrid_AutoGeneratingColumn"
+                  Background="#FFD7F9F9"
+                  BorderBrush="Coral" 
+                  AutoGenerateColumns="True"
+                  BorderThickness="3"
+                  CanUserAddRows="False"
+                  CanUserReorderColumns="False"
+                  CanUserResizeColumns="False"
+                  CanUserSortColumns="False"
+                  EnableColumnVirtualization="false"
+                  EnableRowVirtualization="false"
+                  Foreground="DarkOrchid"
+                  HorizontalGridLinesBrush="Violet"
+                  HorizontalScrollBarVisibility="Visible"
+                  IsReadOnly="True"
+                  RowBackground="MistyRose" 
+                  SelectedIndex="0" 
+                  SelectionMode="Single" 
+                  VerticalGridLinesBrush="Crimson"
+                  VerticalScrollBarVisibility="Visible" 
+                  ColumnWidth="1*">
+            <DataGrid.Effect>
+                <DropShadowEffect BlurRadius="150" Color="Coral" />
+            </DataGrid.Effect>
+            <DataGrid.ToolTip>For more information about Cars doing next: go back to Start window => Car show room => Car show room data</DataGrid.ToolTip>
+            <DataGrid.Resources>
+                <Style TargetType="ToolTip" BasedOn="{StaticResource {x:Type ToolTip}}">
+                    <Setter Property="OverridesDefaultStyle" Value="True" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ToolTip}" >
+                                <TextBox Background="DarkOrchid" Width="200" FontSize="14" FontStyle="Normal" Foreground="MintCream" TextWrapping="WrapWithOverflow" Text="{TemplateBinding ToolTip.Content}" />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </DataGrid.Resources>
+        </DataGrid>
+        <Button x:Name="button_Photo" Command="{Binding LoadLogo}" Content="Load photo here =>" FontStretch="Medium" FontWeight="Medium" FontSize="15" FontFamily="Italic" HorizontalAlignment="Left" Margin="623,32,0,0" VerticalAlignment="Top" Width="143"/>
+        <Button x:Name="button_Refresh" Command="{Binding WindowLoaded}" Content="Refresh"  FontStretch="Medium" FontWeight="Medium" FontSize="15" FontFamily="Italic" HorizontalAlignment="Left" Margin="378,26,0,0" VerticalAlignment="Top" Width="79"/>
+        <Label x:Name="label4" Content="Linked data about Cars of each one Car Brand (read only):" Foreground="MintCream"  FontStretch="Medium" FontWeight="Medium" FontSize="22" FontStyle="Italic" FontFamily="Italic" HorizontalAlignment="Left" Margin="22,320,0,0" VerticalAlignment="Top">
+            <Label.ToolTip>For more information about Cars doing next: go back to Start window => Car show room => Car show room data</Label.ToolTip>
+            <Label.Resources>
+                <Style TargetType="ToolTip" BasedOn="{StaticResource {x:Type ToolTip}}">
+                    <Setter Property="OverridesDefaultStyle" Value="True" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ToolTip}" >
+                                <TextBox Background="DarkOrchid" Width="200" FontSize="14" FontStyle="Normal" Foreground="MintCream" TextWrapping="WrapWithOverflow" Text="{TemplateBinding ToolTip.Content}" />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Label.Resources>
+        </Label>
     </Grid>
 </Window>

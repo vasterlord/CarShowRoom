@@ -14,7 +14,7 @@ namespace CarShowRoom.Model
         private string _transmission;
         private double _engineСapacity;
         private double _fuelPerHundredKm;
-        private int _productionYear;
+        private int? _productionYear;
         private double _price;
 
         public int Id { get; set; }
@@ -109,7 +109,8 @@ namespace CarShowRoom.Model
 
         [ConcurrencyCheck]
         [Required(ErrorMessage = "Field can't be null")]
-        public int ProductionYear
+        [Range(1700, 2025, ErrorMessage = "Incorrect year")]
+        public int? ProductionYear
         {
             get
             {
@@ -117,7 +118,7 @@ namespace CarShowRoom.Model
             }
             set
             {
-                Set<int>(() => this.ProductionYear, ref _productionYear, value);
+                Set<int?>(() => this.ProductionYear, ref _productionYear, value);
             }
         } 
 
