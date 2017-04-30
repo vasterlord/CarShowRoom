@@ -22,6 +22,23 @@ namespace CarShowRoom.ViewModel
 
     public class CarBrandViewModel : ViewModelBase, INotifyPropertyChanged
     {
+        //public void LoadCar()
+        //{
+        //    using (var context = new Context())
+        //    {
+        //        _cars = context.Cars
+        //                  .Join(context.CarBrands,
+        //                        c => c.CarBrandId,
+        //                        o => o.Id,
+        //                        (c, o) => new { c, o })
+        //                  //.Where(t => t.c.CountryProducingId == country.Id)
+        //                  .OrderBy(x => x.c.Id)
+        //                  .Select(x => new { x.c.Id, CarName = string.Concat(x.c.Model, x.o.Brand), x.o.CountryProducing, x.c.Load, x.c.Axel, x.c.Transmission, x.c.EngineCapacity, x.c.FuelPerHunderdKm, x.c.ProductionYear, x.c.Price }).ToList();
+        //        this.RaisePropertyChanged(() => this.Cars);
+        //        _cars.
+        //        SelectedIndexValue = 0;
+        //    }
+        //}
         private ObservableCollection<CarBrand> _carBrands;
         private CarBrand _selectedCarBrand;
         private string _findingOption = string.Empty;
@@ -46,7 +63,7 @@ namespace CarShowRoom.ViewModel
         }
 
         public string FindingValue
-        {
+        { 
             get { return _findingValue; }
             set { _findingValue = value; this.RaisePropertyChanged("FindingValue"); }
         }
