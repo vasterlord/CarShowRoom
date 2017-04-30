@@ -28,8 +28,8 @@
 
     <Grid>
         <DataGrid x:Name="dataGrid"   
-                  ItemsSource="{Binding CarBrands}"  
-                  SelectedItem="{Binding SelectedCarBrand}"
+                  ItemsSource="{Binding Cars}"  
+                  SelectedItem="{Binding SelectedCar}"
                   Width="1092"
                   Height="202"
                   Margin="28,129,0,0"

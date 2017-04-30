@@ -128,6 +128,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Car.cs" />
     <Compile Include="Model\CarBrand.cs" />
+    <Compile Include="Model\CarsShowing.cs" />
     <Compile Include="Model\Client.cs" />
     <Compile Include="Model\MainWinowModel.cs" />
     <Compile Include="ViewModel\CarViewModel.cs" />

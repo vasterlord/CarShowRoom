@@ -20,11 +20,12 @@ namespace CarShowRoom.ViewModel
 {
     public class CarViewModel: ViewModelBase, INotifyPropertyChanged
     {
-        private ObservableCollection<CarBrand> _carBrands;
-        private CarBrand _selectedCarBrand;
+        private ObservableCollection<CarsShowing> _cars;
+        private CarsShowing _selectedCar;
         private string _findingOption = string.Empty;
         private string _findingValue = string.Empty;
-
+         
+        public object temp { get; set; }
         public ICommand WindowLoaded { get; set; }
         public ICommand NewClick { get; set; }
         public ICommand SaveClick { get; set; }
@@ -46,30 +47,30 @@ namespace CarShowRoom.ViewModel
             set { _findingValue = value; this.RaisePropertyChanged("FindingValue"); }
         }
 
-        public ObservableCollection<CarBrand> CarBrands
+        public ObservableCollection<CarsShowing> Cars
         {
             get
             {
-                return _carBrands;
+                return _cars;
             }
         }
 
-        public CarBrand SelectedCarBrand
+        public CarsShowing SelectedCar
         {
             get
             {
-                return _selectedCarBrand;
+                return _selectedCar;
             }
             set
             {
-                _selectedCarBrand = value;
-                this.RaisePropertyChanged("SelectedCarBrand");
+                _selectedCar = value;
+                this.RaisePropertyChanged("SelectedCar");
             }
         }
         public CarViewModel()
         {
             SelectedIndexValue = 0;
-            ////WindowLoaded = new RelayCommand(onLoad);
+            WindowLoaded = new RelayCommand(onLoad);
             //NewClick = new RelayCommand(newClick);
             //SaveClick = new RelayCommand(saveClick);
             //DeleteClick = new RelayCommand(deleteClick);
@@ -85,39 +86,56 @@ namespace CarShowRoom.ViewModel
 
         public void onLoad()
         {
-            LoadCarBrand();
+            LoadCars();
         }
 
         /// <summary>
         /// Helped logic
         /// </summary>
-        public void LoadCarBrand()
+
+        public void LoadCars()
         {
             using (var context = new Context())
             {
-                _carBrands = new ObservableCollection<CarBrand>(context.CarBrands.Include(car => car.Cars).OrderBy(val => val.Id));
-                this.RaisePropertyChanged(() => this.CarBrands);
-                SelectedIndexValue = 0;
-                SelectedCarBrand = _carBrands[0];
+                var tempCars = context.Cars
+                          .Join(context.CarBrands,
+                                cars => cars.CarBrandId,
+                                brands => brands.Id,
+                                (cars, brands) => new { cars, brands })
+                          // .Where(t => t.cars.CarBrandId==t.brands.Id)
+                          .OrderBy(x => x.cars.Id)
+                          .Select(x => new
+                          {
+                              x.cars.Id,
+                              x.brands.Brand,
+                              x.cars.Model,
+                              x.brands.CountryProducing,
+                              x.cars.Load,
+                              x.cars.Axel,
+                              x.cars.Transmission,
+                              x.cars.EngineCapacity,
+                              x.cars.FuelPerHunderdKm,
+                              x.cars.ProductionYear,
+                              x.cars.Price
+                          }).ToList();
+                _cars = new ObservableCollection<CarsShowing>(tempCars.ToList().Select(r => new CarsShowing
+                {
+                    Id = r.Id,
+                    Brand = r.Brand,
+                    Model = r.Model,
+                    Country = r.CountryProducing,
+                    Load = r.Load,
+                    Axel = r.Axel,
+                    Transmission = r.Transmission,
+                    EngineCapacity = r.EngineCapacity,
+                    FuelPerHunderdKm = r.FuelPerHunderdKm,
+                    ProductionYear = r.ProductionYear,
+                    Price = r.Price
+                }).ToList());
+                this.RaisePropertyChanged(() => this.Cars);
+                //SelectedIndexValue = 0; 
+                //SelectedCar = _cars[0];
             }
-        } 
-
-        //public void LoadCars()
-        //{
-        //    using (var context = new Context())
-        //    { 
-        //        _carBrands = context.Cars
-        //                  .Join(context.CarBrands,
-        //                        c => c.CarBrandId,
-        //                        o => o.Id,
-        //                        (c, o) => new { c, o })
-        //                  //.Where(t => t.c.CountryProducingId == country.Id)
-        //                  .OrderBy(x => x.c.Id)
-        //                  .Select(x => new CarBrand { Brand = x.c.Id.ToString(), CarName = string.Concat(x.c.Model, x.o.Brand), x.o.CountryProducing, x.c.Load, x.c.Axel, x.c.Transmission, x.c.EngineCapacity, x.c.FuelPerHunderdKm, x.c.ProductionYear, x.c.Price }).ToList();
-        //        this.RaisePropertyChanged(() => this.Cars);
-        //        _cars.
-        //        SelectedIndexValue = 0;
-        //    }
-        //} 
+        }
     }
 }
