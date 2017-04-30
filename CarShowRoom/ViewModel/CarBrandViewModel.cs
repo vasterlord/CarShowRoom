@@ -19,9 +19,8 @@ using System.Windows.Media.Imaging;
 
 namespace CarShowRoom.ViewModel
 {
-
     public class CarBrandViewModel : ViewModelBase, INotifyPropertyChanged
-    {
+    { 
         private ObservableCollection<CarBrand> _carBrands;
         private CarBrand _selectedCarBrand;
         private string _findingOption = string.Empty;
@@ -273,6 +272,7 @@ namespace CarShowRoom.ViewModel
             }
             return photo;
         }
+
         //private string _filteringOption = string.Empty;
         //private string _filteringValue = string.Empty;
         //private string _operation = string.Empty;
