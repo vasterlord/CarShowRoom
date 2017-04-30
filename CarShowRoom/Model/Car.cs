@@ -23,7 +23,7 @@ namespace CarShowRoom.Model
         [ConcurrencyCheck]
         [Required(ErrorMessage = "Field can't be null")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "The length of the string must be between 3 and 50 characters")]
-        public string Model
+        public virtual string Model
         {
             get
             {

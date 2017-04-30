@@ -12,7 +12,7 @@ namespace CarShowRoom.Model
         private string _fullName;
         private string _homeAddress;
         private string _phoneNumber;
-        private DateTime _dateBuy;
+        private string _dateBuy;
         private double _buyPrice;
 
         public int Id { get; set; }
@@ -65,7 +65,8 @@ namespace CarShowRoom.Model
 
         [ConcurrencyCheck]
         [Required(ErrorMessage = "Field can't be null")]
-        public DateTime DateBuy
+        [StringLength(10, ErrorMessage = "The length of the string must be 10 characters")]
+        public string DateBuy
         {
             get
             {
@@ -73,7 +74,7 @@ namespace CarShowRoom.Model
             }
             set
             {
-                Set<DateTime>(() => this.DateBuy, ref _dateBuy, value);
+                Set<string>(() => this.DateBuy, ref _dateBuy, value);
             }
         } 
 

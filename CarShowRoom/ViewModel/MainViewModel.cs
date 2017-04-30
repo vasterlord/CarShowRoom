@@ -48,6 +48,7 @@ namespace CarShowRoom.ViewModel
 
         public ICommand WindowLoaded {get; set; }
         public ICommand CarBrandLoad { get; set; }
+        public ICommand CarLoad { get; set; } 
 
         public MainViewModel()
         {
@@ -60,6 +61,7 @@ namespace CarShowRoom.ViewModel
 
             WindowLoaded = new RelayCommand(OnLoaded);
             CarBrandLoad = new RelayCommand(CarBrandStart);
+            CarLoad = new RelayCommand(CarStart);
         }
         private void timer_Tick(object sender, EventArgs e)
         {
@@ -75,7 +77,14 @@ namespace CarShowRoom.ViewModel
         {
             CarBrandView carBrandView = new CarBrandView();
             carBrandView.ShowDialog();
+        }
+
+        public void CarStart()
+        {
+            CarView carView = new CarView();
+            carView.ShowDialog();
         } 
+
 
         ////public override void Cleanup()
         ////{

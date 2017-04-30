@@ -94,7 +94,7 @@
                         </Image>
                     </MenuItem.Icon>
                     <Separator/>
-                    <MenuItem Header="_Car show room data" FontSize="13" Foreground="MintCream" Height="23">
+                    <MenuItem Header="_Car show room data" Command="{Binding CarLoad}" FontSize="13" Foreground="MintCream" Height="23">
                         <MenuItem.Icon>
                             <Image>
                                 <Image.Source>
