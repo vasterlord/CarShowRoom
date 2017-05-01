@@ -13,8 +13,8 @@ namespace CarShowRoom.DataSource
     {
         public Context() : base("DBConnection")
         {
-                Database.SetInitializer(new MigrateDatabaseToLatestVersion<Context, 
-                CarShowRoom.Migrations.Configuration>("DBConnection"));
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<Context,
+            CarShowRoom.Migrations.Configuration>("DBConnection"));
         } 
 
         public DbSet<CarBrand> CarBrands { get; set; }
