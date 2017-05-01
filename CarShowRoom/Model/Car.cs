@@ -11,7 +11,7 @@ namespace CarShowRoom.Model
         private string _model;
         private double _load;
         private string _axel;
-        private string _transmission;
+        private string _gearBox;
         private double _engineСapacity;
         private double _fuelPerHundredKm;
         private int? _productionYear;
@@ -67,15 +67,15 @@ namespace CarShowRoom.Model
         [ConcurrencyCheck]
         [Required(ErrorMessage = "Field can't be null")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "The length of the string must be between 3 and 50 characters")]
-        public string Transmission
+        public string GearBox
         {
             get
             {
-                return _transmission;
+                return _gearBox;
             }
             set
             {
-                Set<string>(() => this.Transmission, ref _transmission, value);
+                Set<string>(() => this.GearBox, ref _gearBox, value);
             }
         }
 

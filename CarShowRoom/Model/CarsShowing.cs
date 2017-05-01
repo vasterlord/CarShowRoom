@@ -15,7 +15,7 @@ namespace CarShowRoom.Model
         public string Country { get; set; }
         public double Load { get; set; }
         public string Axel { get; set; }
-        public string Transmission { get; set; }
+        public string GearBox { get; set; }
         public double EngineCapacity { get; set; }
         public double FuelPerHunderdKm { get; set; }
         public int? ProductionYear { get; set; }
