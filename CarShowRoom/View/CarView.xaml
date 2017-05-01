@@ -27,8 +27,8 @@
     </Window.Resources>
     <Grid>
         <DataGrid x:Name="dataGrid"   
-                  ItemsSource="{Binding Cars, UpdateSourceTrigger=PropertyChanged}"  
-                  SelectedItem="{Binding SelectedCar, UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding Cars}"  
+                  SelectedItem="{Binding SelectedCar}"
                   Width="1106"
                   Height="202"
                   Margin="28,81,0,0"
@@ -64,7 +64,7 @@
         <Label x:Name="label" Content="Brand" HorizontalAlignment="Left" Margin="194,326,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="comboBox_Brand" ItemsSource="{Binding BrandItems}" IsReadOnly="True" Text="{Binding SelectedCar.Brand , UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="241,321,0,0" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="label7" Content="Model" Foreground="MintCream" HorizontalAlignment="Left" Margin="380,326,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox_Model" Margin="431,319,0,0" Text="{Binding SelectedCar.Model , UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBox_Model" Margin="431,319,0,0" Text="{Binding SelectedCar.Model , UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="label1" Content="Country" HorizontalAlignment="Left" Margin="572,326,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="textBox_Country" HorizontalAlignment="Left" Height="23" Margin="629,319,0,0" TextWrapping="Wrap" Text="{Binding SelectedCar.Country , UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="label2" Content="Load" HorizontalAlignment="Left" Margin="772,326,0,0" VerticalAlignment="Top"/>

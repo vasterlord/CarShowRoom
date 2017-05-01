@@ -25,7 +25,6 @@ namespace CarShowRoom.ViewModel
         private string _findingOption = string.Empty;
         private string _findingValue = string.Empty;
          
-        public object temp { get; set; }
         public ICommand WindowLoaded { get; set; }
         public ICommand NewClick { get; set; }
         public ICommand SaveClick { get; set; }
@@ -76,24 +75,24 @@ namespace CarShowRoom.ViewModel
             NewClick = new RelayCommand(newClick);
             SaveClick = new RelayCommand(saveClick);
             DeleteClick = new RelayCommand(deleteClick);
-            SearchPress = new RelayCommand(searchPress); 
+            SearchPress = new RelayCommand(searchPress);
             MaxPrice = new RelayCommand(maxPrice);
             BrandItems = new List<string>();
             using (var context = new Context())
             {
                 BrandItems = context.CarBrands.AsEnumerable().Select(x => x.Brand).ToList();
             }
-                ListGears = new List<string>();
-                ListGears.Add("mechanical");
-                ListGears.Add("automatic");
-                ListGears.Add("robotic");
-                ListGears.Add("variative");
-                Options = new List<string>();
-                Options.Add("Brand");
-                Options.Add("Country");
-                Options.Add("Price");
-                _findingOption = Options[0];
-            }
+            ListGears = new List<string>();
+            ListGears.Add("mechanical");
+            ListGears.Add("automatic");
+            ListGears.Add("robotic");
+            ListGears.Add("variative");
+            Options = new List<string>();
+            Options.Add("Brand");
+            Options.Add("Country");
+            Options.Add("Price");
+            _findingOption = Options[0];
+        }
 
         public void maxPrice()
         {
@@ -214,8 +213,8 @@ namespace CarShowRoom.ViewModel
 
         public void saveClick()
         {
-            try
-            {
+            //try
+            //{
                 using (var context = new Context())
                 {
                     ObservableCollection<Car> tempId = new ObservableCollection<Car>(context.Cars.Where(x => x.Id == SelectedCar.Id));
@@ -223,8 +222,14 @@ namespace CarShowRoom.ViewModel
                     {
                         int id = Convert.ToInt32(SelectedCar.Id);
                         var updatedCar = context.Cars.FirstOrDefault(car => car.Id == id);
+                        List<string> idList = context.CarBrands
+                        .Where(x => x.Brand == SelectedCar.Brand)
+                        .AsEnumerable()
+                        .Select(x => x.Id.ToString()).ToList();
+                        int idUpdate = Convert.ToInt32(idList[0]);
                         context.Cars.Attach(updatedCar);
                         context.Entry(updatedCar).State = EntityState.Modified;
+                        updatedCar.CarBrandId = idUpdate;
                         updatedCar.Model = SelectedCar.Model;
                         updatedCar.Load = SelectedCar.Load;
                         updatedCar.Axel = SelectedCar.Axel;
@@ -266,11 +271,11 @@ namespace CarShowRoom.ViewModel
                     }
                     LoadCars();
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //}
         }
 
         public void deleteClick()

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel; 
 
 namespace CarShowRoom.Model
 {
@@ -13,7 +14,8 @@ namespace CarShowRoom.Model
         private string _homeAddress;
         private string _phoneNumber;
         private string _dateBuy;
-        private double _buyPrice;
+        private double? _buyPrice;
+        private double? _servicePercent;
 
         public int Id { get; set; }
         public int CarId { get; set; } 
@@ -65,7 +67,8 @@ namespace CarShowRoom.Model
 
         [ConcurrencyCheck]
         [Required(ErrorMessage = "Field can't be null")]
-        [StringLength(10, ErrorMessage = "The length of the string must be 10 characters")]
+        [StringLength(10, ErrorMessage = "The length of the string must be 10 characters")] 
+        [DefaultValue("dd/MM/YY")]
         public string DateBuy
         {
             get
@@ -79,8 +82,7 @@ namespace CarShowRoom.Model
         } 
 
         [ConcurrencyCheck]
-        [Required(ErrorMessage = "Field can't be null")]
-        public double BuyPrice
+        public double? BuyPrice
         {
             get
             {
@@ -88,10 +90,24 @@ namespace CarShowRoom.Model
             }
             set
             {
-                Set<double>(() => this.BuyPrice, ref _buyPrice, value);
+                Set<double?>(() => this.BuyPrice, ref _buyPrice, value);
+            }
+        }
+
+        [ConcurrencyCheck]  
+        [DefaultValue(5)]
+        public double? ServicePercent
+        {
+            get
+            {
+                return _servicePercent;
+            }
+            set
+            {
+                Set<double?>(() => this.ServicePercent, ref _servicePercent, value);
             }
         } 
-         
+
         public Car Cars { get; set; }
     }
 }

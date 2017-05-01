@@ -117,7 +117,7 @@
                 </MenuItem>
                 <MenuItem Header="_Clients" FontSize="13" Foreground="MintCream" Height="23">
                     <Separator/>
-                    <MenuItem Header="_Clients data" FontSize="13" Foreground="MintCream" Height="23">
+                    <MenuItem Header="_Clients data" Command="{Binding ClientLoad}" FontSize="13" Foreground="MintCream" Height="23">
                         <MenuItem.Icon>
                             <Image>
                                 <Image.Source>
