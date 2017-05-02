@@ -35,6 +35,8 @@ namespace CarShowRoom.ViewModel
         public List<string> Options { get; set; }
         public List<string> ListGears { get; set; } 
         public List<string> BrandItems { get; set; }
+        public List<KeyValuePair<string, double>> ChartCars { get; set; }
+        public ICommand ChartCarsLoad { get; set; }
 
         public string FindingOption
         {
@@ -78,6 +80,7 @@ namespace CarShowRoom.ViewModel
             SearchPress = new RelayCommand(searchPress);
             MaxPrice = new RelayCommand(maxPrice);
             BrandItems = new List<string>();
+            ChartCarsLoad = new RelayCommand(chartCarLoad);
             using (var context = new Context())
             {
                 BrandItems = context.CarBrands.AsEnumerable().Select(x => x.Brand).ToList();
@@ -94,25 +97,37 @@ namespace CarShowRoom.ViewModel
             _findingOption = Options[0];
         }
 
+        public void chartCarLoad()
+        {
+            using (var context = new Context())
+            {
+                onLoad();
+                ChartCars = new List<KeyValuePair<string, double>>();
+                var carData = context.Cars
+                        .Join(context.CarBrands,
+                            cars => cars.CarBrandId,
+                            brands => brands.Id,
+                            (cars, brands) => new { cars, brands })
+                        .Select(x => new { carName = string.Concat(x.brands.Brand, " ", x.cars.Model), x.cars.Price }).ToList();
+                foreach (var item in carData)
+                {
+                    ChartCars.Add(new KeyValuePair<string, double>(item.carName, item.Price));
+                }
+                this.RaisePropertyChanged(() => this.ChartCars);
+            }
+        }
+         
         public void maxPrice()
         {
             using (var context = new Context())
             {
-                var max = _cars.Max(x => x.Price);
-                _cars = new ObservableCollection<CarsShowing>(_cars.Where(r => r.Price == max).Select(r => new CarsShowing
+                if (_cars.Count == 0)
                 {
-                    Id = r.Id,
-                    Brand = r.Brand,
-                    Model = r.Model,
-                    Country = r.Country,
-                    Load = r.Load,
-                    Axel = r.Axel,
-                    GearBox = r.GearBox,
-                    EngineCapacity = r.EngineCapacity,
-                    FuelPerHunderdKm = r.FuelPerHunderdKm,
-                    ProductionYear = r.ProductionYear,
-                    Price = r.Price
-                }).ToList());
+                    LoadCars();
+                }
+                var max = _cars.Max(x => x.Price);
+                _cars = new ObservableCollection<CarsShowing>(_cars.Where(r => r.Price == max) 
+                .ToList());
                 this.RaisePropertyChanged(() => this.Cars);
                 if (_cars.Count > 0)
                 {
@@ -131,20 +146,12 @@ namespace CarShowRoom.ViewModel
                 switch (_findingOption)
                 {
                     case "Brand":
-                        _cars = new ObservableCollection<CarsShowing>(_cars.Where(r => r.Brand == FindingValue).Select(r => new CarsShowing
+                        if (_cars.Count==0)
                         {
-                            Id = r.Id,
-                            Brand = r.Brand,
-                            Model = r.Model,
-                            Country = r.Country,
-                            Load = r.Load,
-                            Axel = r.Axel,
-                            GearBox = r.GearBox,
-                            EngineCapacity = r.EngineCapacity,
-                            FuelPerHunderdKm = r.FuelPerHunderdKm,
-                            ProductionYear = r.ProductionYear,
-                            Price = r.Price
-                        }).ToList());
+                            LoadCars();
+                        }
+                        _cars = new ObservableCollection<CarsShowing>(_cars.Where(r => r.Brand == FindingValue) 
+                        .ToList());
                         this.RaisePropertyChanged(() => this.Cars);
                         if (_cars.Count > 0)
                         {
@@ -153,20 +160,12 @@ namespace CarShowRoom.ViewModel
                         }
                         break;
                     case "Country":
-                        _cars = new ObservableCollection<CarsShowing>(_cars.Where(r => r.Country == FindingValue).Select(r => new CarsShowing
+                        if (_cars.Count == 0)
                         {
-                            Id = r.Id,
-                            Brand = r.Brand,
-                            Model = r.Model,
-                            Country = r.Country,
-                            Load = r.Load,
-                            Axel = r.Axel,
-                            GearBox = r.GearBox,
-                            EngineCapacity = r.EngineCapacity,
-                            FuelPerHunderdKm = r.FuelPerHunderdKm,
-                            ProductionYear = r.ProductionYear,
-                            Price = r.Price
-                        }).ToList());
+                            LoadCars();
+                        }
+                        _cars = new ObservableCollection<CarsShowing>(_cars.Where(r => r.Country == FindingValue) 
+                        .ToList());
                         this.RaisePropertyChanged(() => this.Cars);
                         if (_cars.Count > 0)
                         {
@@ -175,20 +174,12 @@ namespace CarShowRoom.ViewModel
                         }
                         break;
                     case "Price":
-                        _cars = new ObservableCollection<CarsShowing>(_cars.Where(r => r.Price == Convert.ToDouble(FindingValue)).Select(r => new CarsShowing
+                        if (_cars.Count == 0)
                         {
-                            Id = r.Id,
-                            Brand = r.Brand,
-                            Model = r.Model,
-                            Country = r.Country,
-                            Load = r.Load,
-                            Axel = r.Axel,
-                            GearBox = r.GearBox,
-                            EngineCapacity = r.EngineCapacity,
-                            FuelPerHunderdKm = r.FuelPerHunderdKm,
-                            ProductionYear = r.ProductionYear,
-                            Price = r.Price
-                        }).ToList());
+                            LoadCars();
+                        }
+                        _cars = new ObservableCollection<CarsShowing>(_cars.Where(r => r.Price == Convert.ToDouble(FindingValue)) 
+                        .ToList());
                         this.RaisePropertyChanged(() => this.Cars);
                         if (_cars.Count > 0)
                         {
@@ -201,7 +192,11 @@ namespace CarShowRoom.ViewModel
         }
             catch (FormatException f)
             {
-                MessageBox.Show("Incorrect entered format", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(f.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            } 
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         public void newClick()
@@ -213,8 +208,8 @@ namespace CarShowRoom.ViewModel
 
         public void saveClick()
         {
-            //try
-            //{
+            try
+            {
                 using (var context = new Context())
                 {
                     ObservableCollection<Car> tempId = new ObservableCollection<Car>(context.Cars.Where(x => x.Id == SelectedCar.Id));
@@ -271,11 +266,11 @@ namespace CarShowRoom.ViewModel
                     }
                     LoadCars();
                 }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //}
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         public void deleteClick()
@@ -343,6 +338,7 @@ namespace CarShowRoom.ViewModel
                     Price = r.Price
                 }).ToList());
                 this.RaisePropertyChanged(() => this.Cars);
+                this.RaisePropertyChanged(() => this.SelectedCar);
                 SelectedIndexValue = 0; 
                 SelectedCar = _cars[0];
             }
@@ -358,7 +354,7 @@ namespace CarShowRoom.ViewModel
         //        cars => cars.CarBrandId,
         //        brands => brands.Id,
         //        (cars, brands) => new { cars, brands })
-        //  .Where(t => t.cars.CarBrandId==id)
+        //  .Where(t => t.cars.CarBrandId == id)
         //  .OrderBy(x => x.cars.Id)
         //  .Select(x => new
         //  {

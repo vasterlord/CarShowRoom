@@ -12,7 +12,7 @@
         Icon="C:\Users\Yulian\Desktop\EntityProject\CarShowRoom\CarShowRoom\client2.png" 
         ResizeMode="NoResize"  
         Title="Clients data" Background="Black"
-        DataContext="{Binding ClientMain, Source={StaticResource Locator}}" Width="1167" Height="548">
+        DataContext="{Binding ClientMain, Source={StaticResource Locator}}" Width="1035" Height="548">
     <intr:Interaction.Triggers>
         <intr:EventTrigger EventName="Loaded">
             <intr:InvokeCommandAction Command="{Binding WindowLoaded}"/>
@@ -29,9 +29,9 @@
         <DataGrid x:Name="dataGrid"   
                   ItemsSource="{Binding Clients, UpdateSourceTrigger=PropertyChanged}"  
                   SelectedItem="{Binding SelectedClient, UpdateSourceTrigger=PropertyChanged}"
-                  Width="1106"
+                  Width="968"
                   Height="202"
-                  Margin="28,81,0,0"
+                  Margin="28,97,0,0"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Top"
                   AlternatingRowBackground="LightBlue"
@@ -59,6 +59,49 @@
                 <DropShadowEffect BlurRadius="150" Color="DeepSkyBlue" />
             </DataGrid.Effect>
         </DataGrid>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="386,353,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBox x:Name="textBox_Id" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="56,337,0,0" TextWrapping="Wrap" Text="{Binding SelectedClient.Id, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label5" Content="Id" Foreground="MintCream" HorizontalAlignment="Left" Margin="28,342,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label" Content="Car name" HorizontalAlignment="Left" Margin="464,342,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="comboBox_CarName" ItemsSource="{Binding CarNameItems}" IsReadOnly="True" Text="{Binding SelectedClient.CarName, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedClient.CarName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="534,336,0,0" VerticalAlignment="Top" Width="140"></ComboBox>
+        <Label x:Name="label1" Content="Full name" HorizontalAlignment="Left" Margin="197,342,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_FullName" HorizontalAlignment="Left" Height="23" Margin="266,335,0,0" TextWrapping="Wrap" Text="{Binding SelectedClient.FullName , UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="174"/>
+        <Label x:Name="label2" Content="Home address" HorizontalAlignment="Left" Margin="708,340,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_HomeAddress" HorizontalAlignment="Left" Height="23" Margin="808,335,0,0" TextWrapping="Wrap" Text="{Binding SelectedClient.HomeAddress , UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="188"/>
+        <Label x:Name="label3" Content="Phone number" HorizontalAlignment="Left" Margin="28,392,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_PhoneNumber" HorizontalAlignment="Left" Height="23" Margin="126,385,0,0" TextWrapping="Wrap" Text="{Binding SelectedClient.PhoneNumber , UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="198"/>
+        <Label x:Name="label4" Content="Date buy" HorizontalAlignment="Left" Margin="356,392,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_DateBuy" HorizontalAlignment="Left" Height="23" Margin="424,385,0,0" TextWrapping="Wrap" Text="{Binding SelectedClient.DateBuy , UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="154">
+            <TextBox.ToolTip>For enter date buy use this template: dd/MM/YY</TextBox.ToolTip>
+            <TextBox.Resources>
+                <Style TargetType="ToolTip" BasedOn="{StaticResource {x:Type ToolTip}}">
+                    <Setter Property="OverridesDefaultStyle" Value="True" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ToolTip}" >
+                                <TextBox Background="Blue" Width="200" FontSize="14" FontStyle="Normal" Foreground="MintCream" TextWrapping="WrapWithOverflow" Text="{TemplateBinding ToolTip.Content}" />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <Label x:Name="label6" Content="Service percent" HorizontalAlignment="Left" Margin="612,392,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_ServicePercent" HorizontalAlignment="Left" Height="23" Margin="711,385,0,0" TextWrapping="Wrap" Text="{Binding SelectedClient.ServicePercent , UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="66"></TextBox>
+        <Label x:Name="label7" Content="Buy price" HorizontalAlignment="Left" Margin="808,392,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_BuyPrice" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="876,385,0,0" TextWrapping="Wrap" Text="{Binding SelectedClient.BuyPrice , UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="button_New" Command="{Binding NewClick}" Content="New" FontStretch="Medium" FontWeight="Medium" FontSize="15" FontFamily="Italic" HorizontalAlignment="Left" Margin="359,427,0,0" VerticalAlignment="Top" Width="76"/>
+        <Button x:Name="button_Save" Content="Save" Command="{Binding SaveClick}" FontStretch="Medium" FontWeight="Medium" FontSize="15" FontFamily="Italic" HorizontalAlignment="Left" Margin="487,427,0,0" VerticalAlignment="Top" Width="74"/>
+        <Button x:Name="button_Delete" Command="{Binding DeleteClick}" Content="Delete" FontStretch="Medium" FontWeight="Medium" FontSize="15" FontFamily="Italic" HorizontalAlignment="Left" Margin="612,427,0,0" VerticalAlignment="Top" Width="74"/>
+        <Label x:Name="labelN" Foreground="MintCream" Content="Search by" HorizontalAlignment="Left" Margin="41,28,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_Search" Text="{Binding FindingValue, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="240,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="comboBox_Search"  ItemsSource="{Binding Options}" Text="{Binding FindingOption, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding FindingOption, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Margin="111,28,0,0" VerticalAlignment="Top" Width="113" SelectedIndex="0"/>
+        <Border BorderBrush="Purple" BorderThickness="3" HorizontalAlignment="Left" Height="54" Margin="22,10,0,0" VerticalAlignment="Top" Width="559"/>
+        <Button x:Name="button_Refresh" Command="{Binding WindowLoaded}" Content="Refresh"  FontStretch="Medium" FontWeight="Medium" FontSize="15" FontFamily="Italic" HorizontalAlignment="Left" Margin="480,28,0,0" VerticalAlignment="Top" Width="80"/>
+        <Button x:Name="button_Apply" Command="{Binding SearchPress}" Content="Search"  FontStretch="Medium" FontWeight="Medium" FontSize="15" FontFamily="Italic" HorizontalAlignment="Left" Margin="380,28,0,0" VerticalAlignment="Top" Width="79"/>
+        <Border BorderBrush="Orange" BorderThickness="3" HorizontalAlignment="Left" Height="54" Margin="592,10,0,0" VerticalAlignment="Top" Width="404"/>
+        <Label x:Name="label11" Content="Сlient with the most expensive car" HorizontalAlignment="Left" Margin="611,28,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="button_Refresh2" Command="{Binding WindowLoaded}" Content="Refresh"  FontStretch="Medium" FontWeight="Medium" FontSize="15" FontFamily="Italic" HorizontalAlignment="Left" Margin="898,26,0,0" VerticalAlignment="Top" Width="80"/>
+        <Button x:Name="button_ApplyFilter" Command="{Binding MaxPrice}" Content="Apply"  FontStretch="Medium" FontWeight="Medium" FontSize="15" FontFamily="Italic" HorizontalAlignment="Left" Margin="802,26,0,0" VerticalAlignment="Top" Width="79"/>
+        <Button x:Name="button_GetPrice" Command="{Binding CalcPrice}" Content="Get total buy price" FontStretch="Medium" FontWeight="Medium" FontSize="15" FontFamily="Italic" HorizontalAlignment="Left" Margin="862,427,0,0" VerticalAlignment="Top" Width="134"/>
     </Grid>
 </Window>
