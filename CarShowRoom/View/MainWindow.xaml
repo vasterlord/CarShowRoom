@@ -67,7 +67,7 @@
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator/>
-                    <MenuItem Header="_Car brands report" FontSize="13" Foreground="MintCream" Height="23">
+                    <MenuItem Header="_Car brands report" Command="{Binding CarBrandReportLoad}" FontSize="13" Foreground="MintCream" Height="23">
                         <MenuItem.Icon>
                             <Image>
                                 <Image.Source>
@@ -104,7 +104,7 @@
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator/>
-                    <MenuItem Header="_Car show room report" FontSize="13" Foreground="MintCream" Height="23">
+                    <MenuItem Header="_Car show room report" Command="{Binding CarReportLoad}" FontSize="13" Foreground="MintCream" Height="23">
                         <MenuItem.Icon>
                             <Image>
                                 <Image.Source>
@@ -127,7 +127,7 @@
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator/>
-                    <MenuItem Header="_Clients report" FontSize="13" Foreground="MintCream" Height="23">
+                    <MenuItem Header="_Clients report" Command="{Binding ClientReportLoad}" FontSize="13" Foreground="MintCream" Height="23">
                         <MenuItem.Icon>
                             <Image>
                                 <Image.Source>

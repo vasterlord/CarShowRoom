@@ -48,8 +48,11 @@ namespace CarShowRoom.ViewModel
 
         public ICommand WindowLoaded {get; set; }
         public ICommand CarBrandLoad { get; set; }
+        public ICommand CarBrandReportLoad { get; set; }
+        public ICommand CarReportLoad { get; set; }
         public ICommand CarLoad { get; set; }
         public ICommand ClientLoad { get; set; }
+        public ICommand ClientReportLoad { get; set; }
 
         public MainViewModel()
         {
@@ -61,7 +64,10 @@ namespace CarShowRoom.ViewModel
             ToolBarDescriptionItem = item.ToolBarDescription;   
 
             WindowLoaded = new RelayCommand(OnLoaded);
-            CarBrandLoad = new RelayCommand(CarBrandStart);
+            CarBrandLoad = new RelayCommand(CarBrandStart); 
+            CarBrandReportLoad = new RelayCommand(CarBrandReportStart); 
+            CarReportLoad = new RelayCommand(CarReportStart); 
+            ClientReportLoad = new RelayCommand(ClientReportStart);
             ClientLoad = new RelayCommand(ClientStart);
             CarLoad = new RelayCommand(CarStart);
         }
@@ -80,7 +86,21 @@ namespace CarShowRoom.ViewModel
             CarBrandView carBrandView = new CarBrandView();
             carBrandView.ShowDialog();
         }
-
+        public void CarBrandReportStart()
+        {
+            BrandsReportView brandsReportView = new BrandsReportView();
+            brandsReportView.ShowDialog();
+        }
+        public void CarReportStart()
+        {
+            CarReportView carReportView = new CarReportView();
+            carReportView.ShowDialog();
+        }
+        public void ClientReportStart()
+        {
+            ClientReportView clientReportView = new ClientReportView();
+            clientReportView.ShowDialog();
+        }
         public void CarStart()
         {
             CarView carView = new CarView();

@@ -70,9 +70,23 @@
         <Label x:Name="label2" Content="Load" HorizontalAlignment="Left" Margin="772,326,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="textBox_Load" HorizontalAlignment="Left" Height="23" Margin="816,321,0,0" TextWrapping="Wrap" Text="{Binding SelectedCar.Load , UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="label3" Content="Gear box" HorizontalAlignment="Left" Margin="952,326,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="comboBox_GearBox" IsReadOnly="True" ItemsSource="{Binding ListGears}" Text="{Binding SelectedCar.GearBox , UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="1014,322,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="comboBox_GearBox" IsReadOnly="True" ItemsSource="{Binding ListGears}" Text="{Binding SelectedCar.GearBox , UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="1014,322,0,0" VerticalAlignment="Top" Width="120"></ComboBox>
         <Label x:Name="label4" Content="Axel" HorizontalAlignment="Left" Margin="24,378,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox_Axel" HorizontalAlignment="Left" Height="23" Margin="56,371,0,0" TextWrapping="Wrap" Text="{Binding SelectedCar.Axel , UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBox_Axel" HorizontalAlignment="Left" Height="23" Margin="56,371,0,0" TextWrapping="Wrap" Text="{Binding SelectedCar.Axel , UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120">
+            <TextBox.ToolTip>For enter this value use this example: 4x2</TextBox.ToolTip>
+            <TextBox.Resources>
+                <Style TargetType="ToolTip" BasedOn="{StaticResource {x:Type ToolTip}}">
+                    <Setter Property="OverridesDefaultStyle" Value="True" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ToolTip}" >
+                                <TextBox Background="Blue" Width="200" FontSize="14" FontStyle="Normal" Foreground="MintCream" TextWrapping="WrapWithOverflow" Text="{TemplateBinding ToolTip.Content}" />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
         <Label x:Name="label6" Content="EngineCapacity" HorizontalAlignment="Left" Margin="210,378,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="textBox_EngineCapacity" HorizontalAlignment="Left" Height="23" Margin="310,371,0,0" TextWrapping="Wrap" Text="{Binding SelectedCar.EngineCapacity , UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="label8" Content="Fuel per 100 km" HorizontalAlignment="Left" Margin="461,378,0,0" VerticalAlignment="Top"/>
@@ -81,9 +95,9 @@
         <TextBox x:Name="textBox_ProductionYear" HorizontalAlignment="Left" Height="23" Margin="816,371,0,0" TextWrapping="Wrap" Text="{Binding SelectedCar.ProductionYear , UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="label10" Content="Car price" HorizontalAlignment="Left" Margin="952,378,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="textBox_Price" HorizontalAlignment="Left" Height="23" Margin="1014,371,0,0" TextWrapping="Wrap" Text="{Binding SelectedCar.Price , UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="button_New" Command="{Binding NewClick}" Content="New" FontStretch="Medium" FontWeight="Medium" FontSize="15" FontFamily="Italic" HorizontalAlignment="Left" Margin="435,427,0,0" VerticalAlignment="Top" Width="76"/>
-        <Button x:Name="button_Save" Content="Save" Command="{Binding SaveClick}" FontStretch="Medium" FontWeight="Medium" FontSize="15" FontFamily="Italic" HorizontalAlignment="Left" Margin="563,427,0,0" VerticalAlignment="Top" Width="74"/>
-        <Button x:Name="button_Delete" Command="{Binding DeleteClick}" Content="Delete" FontStretch="Medium" FontWeight="Medium" FontSize="15" FontFamily="Italic" HorizontalAlignment="Left" Margin="688,427,0,0" VerticalAlignment="Top" Width="74"/>
+        <Button x:Name="button_New" Command="{Binding NewClick}" Content="New" FontStretch="Medium" FontWeight="Medium" FontSize="15" FontFamily="Italic" HorizontalAlignment="Left" Margin="441,427,0,0" VerticalAlignment="Top" Width="76"/>
+        <Button x:Name="button_Save" Content="Save" Command="{Binding SaveClick}" FontStretch="Medium" FontWeight="Medium" FontSize="15" FontFamily="Italic" HorizontalAlignment="Left" Margin="569,427,0,0" VerticalAlignment="Top" Width="74"/>
+        <Button x:Name="button_Delete" Command="{Binding DeleteClick}" Content="Delete" FontStretch="Medium" FontWeight="Medium" FontSize="15" FontFamily="Italic" HorizontalAlignment="Left" Margin="694,427,0,0" VerticalAlignment="Top" Width="74"/>
         <Label x:Name="labelN" Foreground="MintCream" Content="Search by" HorizontalAlignment="Left" Margin="41,28,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="textBox_Search" Text="{Binding FindingValue, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="240,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <ComboBox x:Name="comboBox_Search"  ItemsSource="{Binding Options}" Text="{Binding FindingOption, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding FindingOption, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Margin="111,28,0,0" VerticalAlignment="Top" Width="113" SelectedIndex="0"/>

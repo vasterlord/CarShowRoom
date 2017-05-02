@@ -141,6 +141,10 @@
     <Compile Include="ViewModel\IGeneralComands.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="DataSource\ViewModelLocator.cs" />
+    <Page Include="Skins\BrandsReportSkin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Skins\CarBrandSkin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -153,11 +157,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\BrandsReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\CarBrandView.xaml">
       <SubType>Form</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\CarReportView.xaml">
+      <SubType>Form</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\CarView.xaml">
+      <SubType>Form</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ClientReportView.xaml">
       <SubType>Form</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -173,11 +189,20 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="View\BrandsReportView.xaml.cs">
+      <DependentUpon>BrandsReportView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CarBrandView.xaml.cs">
       <DependentUpon>CarBrandView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\CarReportView.xaml.cs">
+      <DependentUpon>CarReportView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CarView.xaml.cs">
       <DependentUpon>CarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ClientReportView.xaml.cs">
+      <DependentUpon>ClientReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ClientView.xaml.cs">
       <DependentUpon>ClientView.xaml</DependentUpon>

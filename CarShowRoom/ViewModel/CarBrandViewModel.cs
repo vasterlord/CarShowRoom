@@ -33,10 +33,12 @@ namespace CarShowRoom.ViewModel
         public ICommand SearchPress { get; set; }
         public ICommand OptionChange { get; set; }  
         public ICommand LoadLogo { get; set; }
+        public ICommand ChartBrandLoad { get; set; }
         public int SelectedIndexValue { get; set; } 
         public List<string> Options { get; set; } 
         public BitmapImage ImageSource { get; set; } 
         public string _imageToDatabase { get; set; }
+        public List<KeyValuePair<string, int?>> ChartBands { get; set; }
 
         public string FindingOption
         {
@@ -79,7 +81,8 @@ namespace CarShowRoom.ViewModel
             SaveClick = new RelayCommand(saveClick); 
             DeleteClick = new RelayCommand(deleteClick);  
             SearchPress = new RelayCommand(searchPress);  
-            LoadLogo = new RelayCommand(loadLogo);
+            LoadLogo = new RelayCommand(loadLogo); 
+            ChartBrandLoad = new RelayCommand(chartBrandLoad);
             Options = new List<string>();
             Options.Add(nameof(SelectedCarBrand.Id).ToString());
             Options.Add(nameof(SelectedCarBrand.Brand));
@@ -91,8 +94,21 @@ namespace CarShowRoom.ViewModel
         public void onLoad()
         {
             LoadCarBrand();
+        }
+
+        public void chartBrandLoad()
+        {
+            using (var context = new Context())
+            {
+                onLoad();
+                ChartBands = new List<KeyValuePair<string, int?>>();
+                foreach (var item in _carBrands)
+                {
+                    ChartBands.Add(new KeyValuePair<string, int?>(item.Brand, item.FoundationYear));
+                }
+                this.RaisePropertyChanged(()=>this.ChartBands);
+            }
         } 
-         
 
         public void searchPress()
         {
