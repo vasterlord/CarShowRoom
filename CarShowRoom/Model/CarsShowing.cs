@@ -18,7 +18,7 @@ namespace CarShowRoom.Model
         public string GearBox { get; set; }
         public double EngineCapacity { get; set; }
         public double FuelPerHunderdKm { get; set; }
-        public int? ProductionYear { get; set; }
+        public int ProductionYear { get; set; }
         public double Price { get; set; }
 
     }
