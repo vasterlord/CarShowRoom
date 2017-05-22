@@ -28,7 +28,7 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <chartingToolkit:Chart HorizontalAlignment="Left" BorderBrush="DeepSkyBlue" Title="Clients line chart" LegendTitle="Clinets cash" Foreground="Coral" FontSize="15" Background="AliceBlue" Name="mChart" Margin="32,30,0,0" VerticalAlignment="Top" Height="374" Width="736" BorderThickness="3">
+        <chartingToolkit:Chart HorizontalAlignment="Left" BorderBrush="DeepSkyBlue" Title="Clients horizontal column chart" LegendTitle="Clinets cash" Foreground="Coral" FontSize="15" Background="AliceBlue" Name="mChart" Margin="32,30,0,0" VerticalAlignment="Top" Height="374" Width="736" BorderThickness="3">
             <chartingToolkit:Chart.Effect>
                 <DropShadowEffect BlurRadius="150" Color="DeepSkyBlue" />
             </chartingToolkit:Chart.Effect>
